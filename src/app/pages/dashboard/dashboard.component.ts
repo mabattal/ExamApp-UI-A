@@ -21,5 +21,11 @@ import { FooterComponent } from '../../shared/footer/footer.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  userRole: string = '';
+
   constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.userRole = this.authService.currentUserValue?.role || '';
+  }
 }
