@@ -1,28 +1,63 @@
 .dashboard-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
+.main-content {
+  flex: 1;
+  padding: 80px 20px 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .logout-button {
-  background: #ff4d4d;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin-top: 20px;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .logout-button:hover {
-  background: #ff1a1a;
+  background-color: #c82333;
+}
+
+/* Mobil cihazlar için responsive tasarım */
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    margin-left: 0;
+  }
+
+  .main-content {
+    padding: 80px 15px 15px;
+  }
+
+  .logout-button {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Tablet cihazlar için responsive tasarım */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .dashboard-container {
+    margin-left: 200px;
+  }
 }

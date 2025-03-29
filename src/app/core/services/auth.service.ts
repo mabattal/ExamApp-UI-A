@@ -48,4 +48,16 @@ export class AuthService {
   get currentUserValue() {
     return this.currentUserSubject.value;
   }
+
+  isAdmin(): boolean {
+    return this.currentUserValue?.role === 'Admin';
+  }
+
+  isInstructor(): boolean {
+    return this.currentUserValue?.role === 'Instructor';
+  }
+
+  isStudent(): boolean {
+    return this.currentUserValue?.role === 'Student';
+  }
 }

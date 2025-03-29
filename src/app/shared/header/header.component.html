@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <div class="logo">
+        <a routerLink="/dashboard">ExamApp</a>
+      </div>
+    </div>
+    <div class="user-info">
+      <span class="user-name">{{ currentUser?.fullName || 'Kullanıcı' }}</span>
+      <span class="user-role">{{ currentUser?.role || '' }}</span>
+    </div>
+  </div>
+</header> 

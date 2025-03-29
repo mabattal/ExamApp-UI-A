@@ -1,0 +1,40 @@
+<!-- Mobil Menü Butonu -->
+<button class="mobile-menu-button" (click)="toggleMenu()">
+  <span class="menu-icon">☰</span>
+</button>
+
+<!-- Overlay -->
+<div class="menu-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" [class.mobile-open]="isMenuOpen">
+  <nav>
+    <ul>
+      <!-- Admin Menüsü -->
+      <ng-container *ngIf="isAdmin()">
+        <li><a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">Dashboard</a></li>
+        <li><a routerLink="/users" routerLinkActive="active" (click)="closeMenu()">Kullanıcılar</a></li>
+        <li><a routerLink="/exams" routerLinkActive="active" (click)="closeMenu()">Sınavlar</a></li>
+        <li><a routerLink="/results" routerLinkActive="active" (click)="closeMenu()">Sonuçlar</a></li>
+      </ng-container>
+
+      <!-- Eğitmen Menüsü -->
+      <ng-container *ngIf="isInstructor()">
+        <li><a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">Dashboard</a></li>
+        <li><a routerLink="/exams" routerLinkActive="active" (click)="closeMenu()">Sınavlarım</a></li>
+        <li><a routerLink="/results" routerLinkActive="active" (click)="closeMenu()">Sonuçlar</a></li>
+      </ng-container>
+
+      <!-- Öğrenci Menüsü -->
+      <ng-container *ngIf="isStudent()">
+        <li><a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">Dashboard</a></li>
+        <li><a routerLink="/available-exams" routerLinkActive="active" (click)="closeMenu()">Mevcut Sınavlar</a></li>
+        <li><a routerLink="/my-results" routerLinkActive="active" (click)="closeMenu()">Sonuçlarım</a></li>
+      </ng-container>
+
+      <!-- Ortak Menü -->
+      <li><a (click)="logout()" style="cursor: pointer" (click)="closeMenu()">Çıkış Yap</a></li>
+    </ul>
+  </nav>
+</div>
+  

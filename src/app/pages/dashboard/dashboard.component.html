@@ -1,6 +1,10 @@
 <div class="dashboard-container">
-  <h1>Dashboard</h1>
-  <p>Hoş geldiniz! Buradan sınavları ve kullanıcıları yönetebilirsiniz.</p>
-
-  <button (click)="logout()" class="logout-button">Çıkış Yap</button>
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <main class="main-content">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <app-footer></app-footer>
 </div>

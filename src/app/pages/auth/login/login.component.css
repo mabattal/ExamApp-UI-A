@@ -1,17 +1,17 @@
 /* Login component styles */
 .login-container {
-  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background-color: #f5f5f5;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  padding: 20px;
 }
 
 .login-card {
   background: white;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
@@ -23,79 +23,79 @@
 }
 
 .login-header h1 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #2c3e50;
+  font-weight: 500;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
 .login-button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
+  padding: 0.8rem;
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
-  background-color: #0056b3;
+.login-button:hover:not(:disabled) {
+  background-color: #2980b9;
 }
 
 .login-button:disabled {
-  background-color: #ccc;
+  background-color: #bdc3c7;
   cursor: not-allowed;
 }
 
-/* Tablet ve daha küçük ekranlar için */
-@media (max-width: 768px) {
+/* Mobil cihazlar için responsive tasarım */
+@media screen and (max-width: 480px) {
   .login-card {
     padding: 1.5rem;
   }
-  
+
   .login-header h1 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+  }
+
+  .form-group input {
+    padding: 0.7rem;
   }
 }
 
-/* Mobil ekranlar için */
-@media (max-width: 480px) {
+/* Tablet cihazlar için responsive tasarım */
+@media screen and (min-width: 481px) and (max-width: 768px) {
   .login-card {
-    padding: 1rem;
-  }
-  
-  .form-group input {
-    padding: 0.5rem;
-  }
-  
-  .login-button {
-    padding: 0.5rem;
+    padding: 1.8rem;
   }
 }
   
