@@ -28,8 +28,16 @@ export class SidebarComponent {
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Çıkış yaparken hata:', error);
+        // Hata olsa bile login sayfasına yönlendir
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   toggleMenu(): void {

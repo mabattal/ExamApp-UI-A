@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, tap, catchError, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, tap, catchError, BehaviorSubject, finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl + '/Auth';
+  //private apiUrl = environment.apiUrl + '/Auth';
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser = this.currentUserSubject.asObservable();
 
@@ -20,16 +20,22 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Login`, { email, password }).pipe(
+    return this.http.post<any>(environment.auth.loginUrl, { email, password }).pipe(
       tap((response) => {
-        if (response.data?.token) {
+        if (response.data != null) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userData', JSON.stringify(response.data));
           this.currentUserSubject.next(response.data);
+        } else if (response.errorMessage) {
+          throw new Error(response.errorMessage);
         }
       }),
-      catchError((error: HttpErrorResponse) => {
-        console.error('HTTP Hatası:', error);
+      catchError((error: HttpErrorResponse | Error) => {
+        if (error instanceof HttpErrorResponse) {
+          console.error('HTTP Hatası:', error);
+        } else {
+          console.error('Giriş Hatası:', error.message);
+        }
         throw error;
       })
     );
@@ -39,10 +45,33 @@ export class AuthService {
     return !!localStorage.getItem('token'); // Token varsa true, yoksa false döner
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userData');
-    this.currentUserSubject.next(null);
+  logout(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post(environment.auth.logoutUrl, {}, { 
+      headers: headers,
+      responseType: 'text' 
+    }).pipe(
+      tap((response) => {
+        if (response === "Successfully logged out"){
+          localStorage.clear(); // Tüm local storage'ı temizle
+          this.currentUserSubject.next(null);
+        }        
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Çıkış yaparken hata:', error);
+        // Hata olsa bile local storage'ı temizle
+        localStorage.clear();
+        this.currentUserSubject.next(null);
+        throw error;
+      }),
+      finalize(() => {
+        // Her durumda local storage'ı temizle
+        localStorage.clear();
+        this.currentUserSubject.next(null);
+      })
+    );
   }
 
   get currentUserValue() {

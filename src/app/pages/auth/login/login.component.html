@@ -3,6 +3,9 @@
     <div class="login-header">
       <h1>Giriş Yap</h1>
     </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <form (ngSubmit)="login()">
       <div class="form-group">
         <label for="email">E-posta</label>
