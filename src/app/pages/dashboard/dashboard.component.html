@@ -1,30 +1,25 @@
-<div class="dashboard-container">
-  <app-header></app-header>
-  <app-sidebar></app-sidebar>
-  <main class="main-content">
-    <div class="content">
-      <router-outlet>
-        <div class="dashboard-container">
-          <h1>Dashboard</h1>
-        
-          <div *ngIf="userRole === 'Admin'">
-            <h2>Admin Paneli</h2>
-            <p>Buradan kullanıcıları ve sınavları yönetebilirsiniz.</p>
-          </div>
-        
-          <div *ngIf="userRole === 'Instructor'">
-            <h2>Eğitmen Paneli</h2>
-            <p>Buradan sınav oluşturabilir ve değerlendirme yapabilirsiniz.</p>
-          </div>
-        
-          <div *ngIf="userRole === 'Student'">
-            <h2>Öğrenci Paneli</h2>
-            <p>Sınavlara katılabilir ve sonuçlarınızı görüntüleyebilirsiniz.</p>
-          </div>
-        </div>
-        
-      </router-outlet>
+<div class="content">
+  <div class="dashboard-content">
+    <h1>Dashboard</h1>
+    @switch (userRole) {
+    @case ('Admin') {
+    <div class="role-panel">
+      <h2>Admin Paneli</h2>
+      <p>Buradan kullanıcıları ve sınavları yönetebilirsiniz.</p>
     </div>
-  </main>
-  <app-footer></app-footer>
+    }
+    @case ('Instructor') {
+    <div class="role-panel">
+      <h2>Eğitmen Paneli</h2>
+      <p>Buradan sınav oluşturabilir ve değerlendirme yapabilirsiniz.</p>
+    </div>
+    }
+    @case ('Student') {
+    <div class="role-panel">
+      <h2>Öğrenci Paneli</h2>
+      <p>Sınavlara katılabilir ve sonuçlarınızı görüntüleyebilirsiniz.</p>
+    </div>
+    }
+    }
+  </div>
 </div>

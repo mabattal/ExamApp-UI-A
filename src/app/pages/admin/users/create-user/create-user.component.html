@@ -1,0 +1,97 @@
+<div class="create-user-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>
+        <i class="fas fa-user-plus"></i>
+        Yeni Kullanıcı Ekle
+      </h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fullName">Ad Soyad</label>
+          <input type="text" class="form-control" id="fullName" formControlName="fullName"
+            [class.is-invalid]="fullName?.invalid && fullName?.touched" placeholder="Ad Soyad giriniz">
+          <div class="invalid-feedback" *ngIf="fullName?.invalid && fullName?.touched">
+            <div *ngIf="fullName?.errors?.['required']">Ad Soyad alanı zorunludur</div>
+            <div *ngIf="fullName?.errors?.['minlength']">Ad Soyad en az 3 karakter olmalıdır</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-posta</label>
+          <input type="email" class="form-control" id="email" formControlName="email"
+            [class.is-invalid]="email?.invalid && email?.touched" placeholder="E-posta adresini giriniz">
+          <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+            <div *ngIf="email?.errors?.['required']">E-posta alanı zorunludur</div>
+            <div *ngIf="email?.errors?.['email']">Geçerli bir e-posta adresi giriniz</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+              class="form-control" [class.is-invalid]="password?.invalid && password?.touched"
+              placeholder="Şifre giriniz" (input)="checkPasswordMatch()">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility('password')">
+              <i class="fas" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+            </button>
+          </div>
+          <div class="invalid-feedback" *ngIf="password?.invalid && password?.touched">
+            <div *ngIf="password?.errors?.['required']">Şifre alanı zorunludur</div>
+            <div *ngIf="password?.errors?.['minlength']">Şifre en az 3 karakter olmalıdır</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Şifre Tekrar</label>
+          <div class="password-input">
+            <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPassword"
+              formControlName="confirmPassword" class="form-control"
+              [class.is-invalid]="confirmPassword?.invalid && confirmPassword?.touched || userForm.errors?.['passwordMismatch']"
+              placeholder="Şifreyi tekrar giriniz" (input)="checkPasswordMatch()">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility('confirmPassword')">
+              <i class="fas" [ngClass]="{'fa-eye': !showConfirmPassword, 'fa-eye-slash': showConfirmPassword}"></i>
+            </button>
+          </div>
+          <div class="invalid-feedback" *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+            <div *ngIf="confirmPassword?.errors?.['required']">Şifre tekrar alanı zorunludur</div>
+          </div>
+          <div class="invalid-feedback" *ngIf="userForm.errors?.['passwordMismatch'] && confirmPassword?.touched">
+            Şifreler eşleşmiyor!
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="role">Rol</label>
+          <select class="form-select" id="role" formControlName="role"
+            [class.is-invalid]="role?.invalid && role?.touched">
+            <option [ngValue]="UserRole.Student">Öğrenci</option>
+            <option [ngValue]="UserRole.Instructor">Eğitmen</option>
+            <option [ngValue]="UserRole.Admin">Admin</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="role?.invalid && role?.touched">
+            <div *ngIf="role?.errors?.['required']">Rol seçimi zorunludur</div>
+          </div>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <div class="d-flex">
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading || userForm.invalid">
+            <span class="spinner-border spinner-border-sm me-2" *ngIf="isLoading"></span>
+            Kaydet
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">
+            <i class="fas fa-arrow-left"></i>
+            Geri Dön
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

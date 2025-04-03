@@ -1,0 +1,110 @@
+<div class="users-container">
+  <div class="search-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input 
+        type="email" 
+        class="form-control" 
+        placeholder="E-posta adresine göre ara..." 
+        [(ngModel)]="searchEmail"
+        (keyup.enter)="searchUsers()">
+      <button 
+        class="btn btn-secondary" 
+        (click)="searchUsers()"
+        [disabled]="!searchEmail">
+        <i class="fas fa-search"></i> Ara
+      </button>
+      <button 
+        class="btn btn-outline-secondary" 
+        (click)="clearSearch()"
+        [disabled]="!searchEmail">
+        <i class="fas fa-times"></i> Temizle
+      </button>
+    </div>
+    <button class="btn btn-primary" (click)="createUser()">
+      <i class="fas fa-user-plus"></i>
+      Kullanıcı Ekle
+    </button>
+  </div>
+
+  @if (searchError) {
+    <div class="alert alert-danger mt-3">
+      {{ searchError }}
+    </div>
+  }
+
+  @if (users.length > 0) {
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ad Soyad</th>
+            <th>E-posta</th>
+            <th>Rol</th>
+            <th>Durum</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user.userId) {
+            <tr>
+              <td>{{ user.userId }}</td>
+              <td>{{ user.fullName || '-' }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="role-badge" [ngClass]="{
+                  'role-admin': user.role === UserRole.Admin,
+                  'role-instructor': user.role === UserRole.Instructor,
+                  'role-student': user.role === UserRole.Student
+                }">
+                  {{ getRoleName(user.role) }}
+                </span>
+              </td>
+              <td>
+                <span class="status-badge" [ngClass]="{'status-active': !user.isDeleted, 'status-inactive': user.isDeleted}">
+                  {{ user.isDeleted ? 'Pasif' : 'Aktif' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-primary" (click)="editUser(user)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteUser(user)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @if (!searchEmail) {
+      <div class="pagination-container">
+        <div class="pagination-info">
+          <span class="page-info">Sayfa {{ currentPage }}</span>
+        </div>
+        <div class="pagination-buttons">
+          <button 
+            class="btn btn-outline-primary" 
+            [disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)">
+            <i class="fas fa-chevron-left"></i> Önceki
+          </button>
+          <button 
+            class="btn btn-outline-primary" 
+            [disabled]="users.length < pageSize"
+            (click)="changePage(currentPage + 1)">
+            Sonraki <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="empty-state">
+      <i class="fas fa-users"></i>
+      <p>Henüz kullanıcı bulunmuyor</p>
+    </div>
+  }
+</div>

@@ -7,6 +7,12 @@ export const environment = {
     auth: {
         loginUrl: `${baseApiUrl}/Auth/Login`,
         logoutUrl: `${baseApiUrl}/Auth/Logout`
-    }
+    },
+    user: {
+        getUsersUrl: `${baseApiUrl}/Users/{pageNumber}/{pageSize}`,
+        getUserUrl: `${baseApiUrl}/Users/{value}`,
+        createUserUrl: `${baseApiUrl}/Users`
+    },
+    
 };
   

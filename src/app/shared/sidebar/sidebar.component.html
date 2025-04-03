@@ -12,7 +12,7 @@
     <ul>
       <!-- Admin Menüsü -->
       <ng-container *ngIf="isAdmin()">
-        <li><a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">Dashboard</a></li>
+        <li><a routerLink="/admin" routerLinkActive="active" (click)="closeMenu()">Admin Paneli</a></li>
         <li><a routerLink="/users" routerLinkActive="active" (click)="closeMenu()">Kullanıcılar</a></li>
         <li><a routerLink="/exams" routerLinkActive="active" (click)="closeMenu()">Sınavlar</a></li>
         <li><a routerLink="/results" routerLinkActive="active" (click)="closeMenu()">Sonuçlar</a></li>
