@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -84,9 +84,20 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users/update/', id.toString()]);
   }
 
-  deleteUser(user: UserResponseModel) {
-    // TODO: Implement delete user functionality
-    console.log('Delete user:', user);
+  deleteUser(id: number) {
+    const confirmation = confirm('Bu kullanıcıyı silmek istediğinizden emin misiniz?');
+    if (confirmation) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          alert('Kullanıcı başarıyla silindi!');
+          this.loadUsers();  // Kullanıcı listesini tekrar yükleyerek güncelleme yapıyoruz
+        },
+        error: (error) => {
+          console.error('Hata:', error);
+          alert('Kullanıcı silinirken bir hata oluştu!');
+        }
+      });
+    }
   }
 
   getRoleName(role: number): string {

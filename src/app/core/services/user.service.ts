@@ -39,4 +39,11 @@ export class UserService {
 
     return this.http.put<ApiEmptyResponse>(url, user);
   }
+
+  deleteUser(id: number): Observable<ApiEmptyResponse> {
+    const url = environment.user.deleteUserUrl
+      .replace('{id}', id.toString());
+
+    return this.http.delete<ApiEmptyResponse>(url);
+  }
 }
