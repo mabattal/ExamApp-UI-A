@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { UserResponseModel } from '../models/UserResponseModel';
-import { ApiResponse } from '../models/api-response.model';
+import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
 import { UserCreateRequestModel } from '../models/user-create-request.model';
+import { UserUpdateRequestModel } from '../models/user-update-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,12 @@ export class UserService {
   createUser(user: UserCreateRequestModel): Observable<ApiResponse<{ id: number }>> {
     const url = environment.user.createUserUrl;
     return this.http.post<ApiResponse<{ id: number }>>(url, user);
+  }
+
+  updateUser(id: number, user:UserUpdateRequestModel): Observable<ApiEmptyResponse> {
+    const url = environment.user.updateUserUrl
+      .replace('{id}', id.toString());
+
+    return this.http.put<ApiEmptyResponse>(url, user);
   }
 }

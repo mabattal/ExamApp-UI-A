@@ -80,9 +80,8 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users/create']);
   }
 
-  editUser(user: UserResponseModel) {
-    // TODO: Implement edit user functionality
-    console.log('Edit user:', user);
+  editUser(id: number) {
+    this.router.navigate(['/users/update/', id.toString()]);
   }
 
   deleteUser(user: UserResponseModel) {

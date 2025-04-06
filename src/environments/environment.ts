@@ -11,7 +11,9 @@ export const environment = {
     user: {
         getUsersUrl: `${baseApiUrl}/Users/{pageNumber}/{pageSize}`,
         getUserUrl: `${baseApiUrl}/Users/{value}`,
-        createUserUrl: `${baseApiUrl}/Users`
+        createUserUrl: `${baseApiUrl}/Users`,
+        updateUserUrl: `${baseApiUrl}/Users/{id}`,
+        deleteUserUrl: `${baseApiUrl}/Users/{id}`
     },
     
 };
