@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { UserResponseModel } from '../models/UserResponseModel';
+import { UserResponseModel } from '../models/user/UserResponseModel';
 import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
-import { UserCreateRequestModel } from '../models/user-create-request.model';
-import { UserUpdateRequestModel } from '../models/user-update-request.model';
+import { UserCreateRequestModel } from '../models/user/user-create-request.model';
+import { UserUpdateRequestModel } from '../models/user/user-update-request.model';
 
 @Injectable({
   providedIn: 'root'

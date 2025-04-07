@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRole } from '../../../../core/enums/user-role.enum';
 import { UserService } from '../../../../core/services/user.service';
-import { UserUpdateRequestModel } from '../../../../core/models/user-update-request.model';
+import { UserUpdateRequestModel } from '../../../../core/models/user/user-update-request.model';
 import { ApiResponse } from '../../../../core/models/api-response.model';
-import { UserResponseModel } from '../../../../core/models/UserResponseModel';
+import { UserResponseModel } from '../../../../core/models/user/UserResponseModel';
 
 @Component({
   selector: 'app-update-user',

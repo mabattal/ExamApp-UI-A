@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
-import { UserResponseModel } from '../../../core/models/UserResponseModel';
+import { UserResponseModel } from '../../../core/models/user/UserResponseModel';
 import { UserRole } from '../../../core/enums/user-role.enum';
 import { ApiResponse } from '../../../core/models/api-response.model';
 
@@ -84,10 +84,10 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users/update/', id.toString()]);
   }
 
-  deleteUser(id: number) {
-    const confirmation = confirm('Bu kullanıcıyı silmek istediğinizden emin misiniz?');
+  deleteUser(user: UserResponseModel) {
+    const confirmation = confirm(`${user.email} kullanıcısını silmek istediğinizden emin misiniz?`);
     if (confirmation) {
-      this.userService.deleteUser(id).subscribe({
+      this.userService.deleteUser(user.userId).subscribe({
         next: () => {
           alert('Kullanıcı başarıyla silindi!');
           this.loadUsers();  // Kullanıcı listesini tekrar yükleyerek güncelleme yapıyoruz

@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
-import { UserCreateRequestModel } from '../../../../core/models/user-create-request.model';
+import { UserCreateRequestModel } from '../../../../core/models/user/user-create-request.model';
 import { UserRole } from '../../../../core/enums/user-role.enum';
 
 @Component({
