@@ -27,19 +27,6 @@ export class SidebarComponent {
     return this.authService.isStudent();
   }
 
-  logout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Çıkış yaparken hata:', error);
-        // Hata olsa bile login sayfasına yönlendir
-        this.router.navigate(['/login']);
-      }
-    });
-  }
-
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }

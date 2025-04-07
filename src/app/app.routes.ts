@@ -7,6 +7,7 @@ import { UsersComponent } from './pages/admin/users/users.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { CreateUserComponent } from './pages/admin/users/create-user/create-user.component';
 import { UpdateUserComponent } from './pages/admin/users/update-user/update-user.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +20,8 @@ export const appRoutes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: UsersComponent },
       { path: 'users/create', component: CreateUserComponent },      
-      { path: 'users/update/:id', component: UpdateUserComponent }
+      { path: 'users/update/:id', component: UpdateUserComponent },
+      { path: 'profile', component: ProfileComponent }
     ]
   },
   { path: '**', redirectTo: 'dashboard' }

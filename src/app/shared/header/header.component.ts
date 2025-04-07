@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
@@ -15,7 +15,7 @@ export class HeaderComponent {
   isSidebarOpen: boolean = false;
   @Output() sidebarToggle = new EventEmitter<boolean>();
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
@@ -24,5 +24,22 @@ export class HeaderComponent {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
     this.sidebarToggle.emit(this.isSidebarOpen);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Çıkış yaparken hata:', error);
+        // Hata olsa bile login sayfasına yönlendir
+        this.router.navigate(['/login']);
+      }
+    });
   }
 } 
