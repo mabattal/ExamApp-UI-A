@@ -85,17 +85,17 @@ export class CreateUserComponent implements OnInit {
         error: (error) => {
           // API'nin döndürdüğü hata mesajlarını al
           if (error.error?.errorMessage) {
-            this.errorMessage = Array.isArray(error.error.errorMessage) 
-              ? error.error.errorMessage.join(', ') 
+            this.errorMessage = Array.isArray(error.error.errorMessage)
+              ? error.error.errorMessage.join(', ')
               : String(error.error.errorMessage);
           } else {
             this.errorMessage = 'Kullanıcı oluşturulurken bir hata oluştu';
           }
-      
+
           this.isLoading = false;
         }
       });
-      
+
     } else {
       Object.keys(this.userForm.controls).forEach(key => {
         const control = this.userForm.get(key);

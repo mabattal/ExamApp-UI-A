@@ -21,6 +21,19 @@ export class HeaderComponent {
     });
   }
 
+  getUserRole(role: string): string {
+    switch(role) {
+      case 'Admin':
+        return 'Admin';
+      case 'Instructor':
+        return 'Eğitmen';
+      case 'Student':
+        return 'Öğrenci';
+      default:
+        return role;
+    }
+  }
+  
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
     this.sidebarToggle.emit(this.isSidebarOpen);

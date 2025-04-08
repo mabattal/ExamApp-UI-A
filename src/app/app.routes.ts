@@ -11,20 +11,19 @@ import { AdminGuard } from './core/guards/admin.guard';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { 
-    path: '', 
+  {
+    path: '',
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
-      { path: 'users/create', component: CreateUserComponent, canActivate: [AdminGuard] },      
+      { path: 'users/create', component: CreateUserComponent, canActivate: [AdminGuard] },
       { path: 'users/update/:id', component: UpdateUserComponent, canActivate: [AdminGuard] },
       { path: 'profile', component: ProfileComponent }
     ]
   },
-  // ⬇️ Unauthorized sayfası burada
   {
     path: 'unauthorized',
     loadComponent: () =>
