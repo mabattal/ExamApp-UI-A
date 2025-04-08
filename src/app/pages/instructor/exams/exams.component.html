@@ -1,0 +1,50 @@
+<div class="exams-container">
+    <div class="header-section">
+        <h2>Sınavlar</h2>
+        <button class="btn btn-primary">
+            <i class="fas fa-plus"></i> Sınav Ekle
+        </button>
+    </div>
+
+    <div *ngIf="exams.length > 0">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Başlama Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Süre (dk)</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let exam of exams">
+                        <td>{{ exam.examId }}</td>
+                        <td>{{ exam.title }}</td>
+                        <td>{{ formatDate(exam.startDate) }}</td>
+                        <td>{{ formatDate(exam.endDate) }}</td>
+                        <td>{{ exam.duration }} dk</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mx-1">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="exams.length === 0" class="empty-state">
+        <i class="fas fa-clipboard-list"></i>
+        <p>Henüz sınav bulunmuyor</p>
+    </div>
+</div>

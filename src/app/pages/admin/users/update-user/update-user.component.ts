@@ -103,7 +103,7 @@ export class UpdateUserComponent implements OnInit {
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/users']);
+        this.router.navigate(['/admin/users']);
         alert('Kullanıcı başarıyla güncellendi!');
       },
       error: (err) => {
@@ -115,6 +115,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/admin/users']);
   }
 }

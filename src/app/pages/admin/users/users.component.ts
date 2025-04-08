@@ -77,11 +77,11 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
-    this.router.navigate(['/users/create']);
+    this.router.navigate(['/admin/users/create']);
   }
 
   editUser(id: number) {
-    this.router.navigate(['/users/update/', id.toString()]);
+    this.router.navigate(['/admin/users/update/', id.toString()]);
   }
 
   deleteUser(user: UserResponseModel) {

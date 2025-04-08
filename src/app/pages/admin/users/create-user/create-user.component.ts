@@ -78,7 +78,7 @@ export class CreateUserComponent implements OnInit {
       this.userService.createUser(userData).subscribe({
         next: (response) => {
           if (response.data) {
-            this.router.navigate(['/users']);
+            this.router.navigate(['/admin/users']);
             alert('Kullanıcı başarıyla kaydedildi!');
           }
         },
@@ -107,6 +107,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/admin/users']);
   }
 } 
