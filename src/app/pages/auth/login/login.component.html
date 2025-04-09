@@ -29,8 +29,11 @@
           placeholder="Şifreniz"
         >
       </div>
-      <button type="submit" class="login-button" [disabled]="!email || !password">
+      <!-- <button type="submit" class="login-button" [disabled]="!email || !password">
         Giriş Yap
+      </button> -->
+      <button type="submit" class="login-button" [disabled]="loading">
+        {{ loading ? 'Giriş Yapılıyor...' : 'Giriş Yap' }}
       </button>
     </form>
   </div>

@@ -12,7 +12,7 @@
     <ul>
       <!-- Admin Menüsü -->
       <ng-container *ngIf="isAdmin()">
-        <li><a routerLink="/admin" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
+        <li><a routerLink="/admin/dashboard" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
         <li><a routerLink="/admin/users" routerLinkActive="active" (click)="closeMenu()">Kullanıcılar</a></li>
         <li><a routerLink="/exams" routerLinkActive="active" (click)="closeMenu()">Sınavlar</a></li>
         <li><a routerLink="/results" routerLinkActive="active" (click)="closeMenu()">Sonuçlar</a></li>
@@ -20,14 +20,14 @@
 
       <!-- Eğitmen Menüsü -->
       <ng-container *ngIf="isInstructor()">
-        <li><a routerLink="/instructor" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
+        <li><a routerLink="/instructor/dashboard" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
         <li><a routerLink="/instructor/exams" routerLinkActive="active" (click)="closeMenu()">Sınavlarım</a></li>
         <li><a routerLink="/results" routerLinkActive="active" (click)="closeMenu()">Sonuçlar</a></li>
       </ng-container>
 
       <!-- Öğrenci Menüsü -->
       <ng-container *ngIf="isStudent()">
-        <li><a routerLink="/student" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
+        <li><a routerLink="/student/dashboard" routerLinkActive="active" (click)="closeMenu()">Anasayfa</a></li>
         <li><a routerLink="/available-exams" routerLinkActive="active" (click)="closeMenu()">Mevcut Sınavlar</a></li>
         <li><a routerLink="/my-results" routerLinkActive="active" (click)="closeMenu()">Sonuçlarım</a></li>
       </ng-container>

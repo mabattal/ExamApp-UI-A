@@ -15,22 +15,42 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  loading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
-    this.errorMessage = ''; // Her girişte hata mesajını temizle
+    this.errorMessage = '';
+    this.loading = true;
+
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         if (response.data) {
           console.log('Giriş başarılı:', response);
-          this.router.navigate(['/dashboard']);
+          const role = response.data.role;
+
+          switch (role) {
+            case 'Admin':
+              this.router.navigate(['/admin/dashboard']);
+              break;
+            case 'Instructor':
+              this.router.navigate(['/instructor/dashboard']);
+              break;
+            case 'Student':
+              this.router.navigate(['/student/dashboard']);
+              break;
+            default:
+              this.router.navigate(['/']); // varsayılan
+          }
         }
       },
       error: (error) => {
         console.error('Giriş hatası:', error);
         this.errorMessage = error instanceof Error ? error.message : 'E-posta veya şifre hatalı.';
       },
+      complete: () => {
+        this.loading = false;
+      }
     });
   }
 }
