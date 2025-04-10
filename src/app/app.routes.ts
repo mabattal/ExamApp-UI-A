@@ -126,11 +126,15 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/instructor/dashboard/dashboard.component').then(m => m.InstructorDashboardComponent),
           },
-
           {
             path: 'exams',
             loadComponent: () =>
               import('./pages/instructor/exams/exams.component').then(m => m.ExamsComponent),
+          },
+          {
+            path: 'exams/create',
+            loadComponent: () =>
+              import('./pages/instructor/exams/create-exam/create-exam.component').then(m => m.CreateExamComponent),
           },
         ],
       },

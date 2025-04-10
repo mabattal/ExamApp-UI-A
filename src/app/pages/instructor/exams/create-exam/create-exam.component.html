@@ -1,0 +1,47 @@
+<div class="exam-form-container">
+    <h2 class="form-title">Yeni Sınav Oluştur</h2>
+  
+    <form [formGroup]="examForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="title">Başlık</label>
+        <input id="title" formControlName="title" type="text" />
+        <small *ngIf="title?.touched && title?.invalid" class="error">Başlık gereklidir (en fazla 200 karakter).</small>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Açıklama</label>
+        <textarea id="description" formControlName="description" rows="3"></textarea>
+        <small *ngIf="description?.touched && description?.invalid" class="error">Açıklama gereklidir (en fazla 500 karakter).</small>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startDate">Başlangıç Tarihi</label>
+          <input id="startDate" formControlName="startDate" type="datetime-local" />
+          <small *ngIf="startDate?.touched && startDate?.invalid" class="error">Başlangıç tarihi gereklidir.</small>
+        </div>
+  
+        <div class="form-group">
+          <label for="endDate">Bitiş Tarihi</label>
+          <input id="endDate" formControlName="endDate" type="datetime-local" />
+          <small *ngIf="endDate?.touched && endDate?.invalid" class="error">Bitiş tarihi gereklidir.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="duration">Süre (dakika)</label>
+        <input id="duration" formControlName="duration" type="number" min="1" />
+        <small *ngIf="duration?.touched && duration?.invalid" class="error">Geçerli bir süre giriniz.</small>
+      </div>
+  
+      <div *ngIf="errorMessage" class="error-box">
+        {{ errorMessage }}
+      </div>
+  
+      <div class="button-row">
+        <button type="submit" [disabled]="isLoading">Kaydet</button>
+        <button type="button" class="cancel" (click)="onCancel()">İptal</button>
+      </div>
+    </form>
+  </div>
+  

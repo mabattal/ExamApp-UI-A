@@ -4,6 +4,7 @@ import { ExamService } from '../../../core/services/exam.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ApiResponse } from '../../../core/models/api-response.model';
 import { CommonModule, DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exams',
@@ -23,6 +24,7 @@ export class ExamsComponent implements OnInit {
   constructor(
     private examService: ExamService, 
     private authService: AuthService,
+    private router: Router,
     private datePipe: DatePipe) {}
 
   ngOnInit(): void {
@@ -54,6 +56,11 @@ export class ExamsComponent implements OnInit {
   
   formatDate(date: Date): string {
     return this.datePipe.transform(date, 'd MMMM yyyy HH:mm', 'tr')!;
+  }
+
+  createExam() {
+    this.router.navigate(['/instructor/exams/create']);
+    console.log('Sınav oluşturma ekranı açılıyor...');
   }
   
 }

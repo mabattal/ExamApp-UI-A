@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { UserResponseModel } from '../models/user/UserResponseModel';
-import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
-import { UserCreateRequestModel } from '../models/user/user-create-request.model';
-import { UserUpdateRequestModel } from '../models/user/user-update-request.model';
+import { ApiResponse } from '../models/api-response.model';
 import { Exam } from '../models/exam/exam-response.model';
+import { ExamCreateRequestModel } from '../models/exam/examCreateRequestModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +19,19 @@ export class ExamService {
     return this.http.get<ApiResponse<Exam[]>>(url);
   }
 
-  getUser(value: string): Observable<ApiResponse<UserResponseModel>> {
+  /* getUser(value: string): Observable<ApiResponse<UserResponseModel>> {
     const url = environment.user.getUserUrl
       .replace('{value}', value);
 
     return this.http.get<ApiResponse<UserResponseModel>>(url);
+  } */
+
+  createExam(exam: ExamCreateRequestModel): Observable<ApiResponse<{ id: number }>> {
+    const url = environment.exam.createExamUrl;
+    return this.http.post<ApiResponse<{ id: number }>>(url, exam);
   }
 
-  createUser(user: UserCreateRequestModel): Observable<ApiResponse<{ id: number }>> {
-    const url = environment.user.createUserUrl;
-    return this.http.post<ApiResponse<{ id: number }>>(url, user);
-  }
-
-  updateUser(id: number, user:UserUpdateRequestModel): Observable<ApiEmptyResponse> {
+  /* updateUser(id: number, user:UserUpdateRequestModel): Observable<ApiEmptyResponse> {
     const url = environment.user.updateUserUrl
       .replace('{id}', id.toString());
 
@@ -45,5 +43,5 @@ export class ExamService {
       .replace('{id}', id.toString());
 
     return this.http.delete<ApiEmptyResponse>(url);
-  }
+  } */
 }
