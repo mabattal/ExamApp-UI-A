@@ -136,6 +136,11 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/instructor/exams/create-exam/create-exam.component').then(m => m.CreateExamComponent),
           },
+          {
+            path: 'exams/update/:id',
+            loadComponent: () =>
+              import('./pages/instructor/exams/update-exam/update-exam.component').then(m => m.UpdateExamComponent),
+          },
         ],
       },
 

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ApiResponse } from '../models/api-response.model';
+import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
 import { Exam } from '../models/exam/exam-response.model';
 import { ExamCreateRequestModel } from '../models/exam/examCreateRequestModel';
+import { ExamUpdateRequestModel } from '../models/exam/examUpdateRequestModel';
 
 @Injectable({
   providedIn: 'root'
@@ -19,29 +20,29 @@ export class ExamService {
     return this.http.get<ApiResponse<Exam[]>>(url);
   }
 
-  /* getUser(value: string): Observable<ApiResponse<UserResponseModel>> {
-    const url = environment.user.getUserUrl
-      .replace('{value}', value);
+  getExam(id: string): Observable<ApiResponse<Exam>> {
+    const url = environment.exam.getExamUrl
+      .replace('{id}', id);
 
-    return this.http.get<ApiResponse<UserResponseModel>>(url);
-  } */
+    return this.http.get<ApiResponse<Exam>>(url);
+  }
 
   createExam(exam: ExamCreateRequestModel): Observable<ApiResponse<{ id: number }>> {
     const url = environment.exam.createExamUrl;
     return this.http.post<ApiResponse<{ id: number }>>(url, exam);
   }
 
-  /* updateUser(id: number, user:UserUpdateRequestModel): Observable<ApiEmptyResponse> {
-    const url = environment.user.updateUserUrl
+   updateExam(id: number, exam:ExamUpdateRequestModel): Observable<ApiEmptyResponse> {
+    const url = environment.exam.updateExamUrl
       .replace('{id}', id.toString());
 
-    return this.http.put<ApiEmptyResponse>(url, user);
+    return this.http.put<ApiEmptyResponse>(url, exam);
   }
 
-  deleteUser(id: number): Observable<ApiEmptyResponse> {
-    const url = environment.user.deleteUserUrl
+  deleteExam(id: number): Observable<ApiEmptyResponse> {
+    const url = environment.exam.deleteExamUrl
       .replace('{id}', id.toString());
 
     return this.http.delete<ApiEmptyResponse>(url);
-  } */
+  }
 }

@@ -5,12 +5,14 @@ import { appRoutes } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './core/services/user.service';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([authInterceptor])),
     FormsModule,
-    UserService
+    UserService,
+    provideToastr()
   ]
 };

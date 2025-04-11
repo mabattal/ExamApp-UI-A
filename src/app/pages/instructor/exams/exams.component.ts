@@ -62,5 +62,25 @@ export class ExamsComponent implements OnInit {
     this.router.navigate(['/instructor/exams/create']);
     console.log('Sınav oluşturma ekranı açılıyor...');
   }
+
+  editExam(id: number) {
+    this.router.navigate(['/instructor/exams/update', id.toString()]);
+  }
+
+  deleteExam(exam: Exam) {
+    const confirmation = confirm(`${exam.title} sınavını silmek istediğinizden emin misiniz?`);
+    if (confirmation) {
+      this.examService.deleteExam(exam.examId).subscribe({
+        next: () => {
+          alert('Sınav başarıyla silindi!');
+          this.loadExams();  // Sınav listesini tekrar yükleyerek güncelleme yapıyoruz
+        },
+        error: (error) => {
+          console.error('Hata:', error);
+          alert('Sınav silinirken bir hata oluştu!');
+        }
+      });
+    }
+  }
   
 }

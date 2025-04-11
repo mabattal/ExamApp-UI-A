@@ -1,5 +1,5 @@
 <div class="exam-form-container">
-    <h2 class="form-title">Yeni Sınav Oluştur</h2>
+    <h2 class="form-title">Sınavı Güncelle</h2>
   
     <form [formGroup]="examForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
@@ -39,9 +39,10 @@
       </div>
   
       <div class="button-row">
-        <button type="submit" [disabled]="isLoading">Kaydet</button>
-        <button type="button" class="cancel" (click)="onCancel()"><i class="fas fa-arrow-left"></i>
-          Geri Dön</button>
+        <button type="submit" [disabled]="isLoading">Güncelle</button>
+        <button type="button" class="cancel" (click)="onCancel()">
+          <i class="fas fa-arrow-left"></i> Geri Dön
+        </button>
       </div>
     </form>
   </div>
