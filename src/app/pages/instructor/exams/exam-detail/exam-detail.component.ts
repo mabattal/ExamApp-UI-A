@@ -5,6 +5,7 @@ import { Exam } from '../../../../core/models/exam/exam-response.model';
 import { Question } from '../../../../core/models/question/question-response.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { QuestionService } from '../../../../core/services/question.service';
 
 @Component({
   selector: 'app-exam-detail',
@@ -17,11 +18,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class ExamDetailComponent implements OnInit {
   exam: Exam | null = null;
   currentPage = 1;
-  pageSize = 1;
+  pageSize = 3;
 
   constructor(
     private route: ActivatedRoute,
     private examService: ExamService,
+    private questionService: QuestionService,
     private datePipe: DatePipe,
     private router: Router,
     private sanitizer: DomSanitizer
@@ -71,5 +73,25 @@ export class ExamDetailComponent implements OnInit {
 
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  editQuestion(id: number) {
+    this.router.navigate(['/instructor/update-question', id.toString()]);
+  }
+
+  deleteQuestion(question: Question) {
+    const confirmation = confirm(`Soruyu silmek istediğinizden emin misiniz?`);
+    if (confirmation) {
+      this.questionService.deleteQuestion(question.questionId).subscribe({
+        next: () => {
+          alert('Soru başarıyla silindi!');
+          this.router.navigate(['/instructor/exams', question.examId.toString()]);  // Sınav detay sayfasını tekrar yükleyerek güncelleme yapıyoruz
+        },
+        error: (error) => {
+          console.error('Hata:', error);
+          alert('Soru silinirken bir hata oluştu!');
+        }
+      });
+    }
   }
 }

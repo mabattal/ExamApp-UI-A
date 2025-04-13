@@ -1,5 +1,5 @@
 <div class="question-form-container">
-    <h2 class="form-title">Soru Ekle</h2>
+    <h2 class="form-title">Soru Güncelle</h2>
 
     <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-wrapper">
 
@@ -82,9 +82,7 @@
         <!-- Butonlar -->
         <div class="form-buttons">
             <button type="button" (click)="onCancel()" class="btn btn-cancel">Vazgeç</button>
-            <button type="submit" [disabled]="isLoading" class="btn btn-submit">
-                {{ isLoading ? 'Kaydediliyor...' : 'Kaydet' }}
-            </button>
+            <button type="submit" class="btn btn-submit">Güncelle</button>
         </div>
     </form>
 </div>

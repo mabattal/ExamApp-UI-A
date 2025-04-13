@@ -153,6 +153,11 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/instructor/questions/create-question/create-question.component').then(m => m.CreateQuestionComponent),
           },
+          {
+            path: 'update-question/:id',
+            loadComponent: () =>
+              import('./pages/instructor/questions/update-question/update-question.component').then(m => m.UpdateQuestionComponent),
+          },
         ],
       },
 

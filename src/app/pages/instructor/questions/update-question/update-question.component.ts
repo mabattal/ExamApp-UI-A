@@ -1,27 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Editor, NgxEditorModule, Validators } from 'ngx-editor';
 import { QuestionService } from '../../../../core/services/question.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { QuestionCreateRequestModel } from '../../../../core/models/question/questionCreateRequestModel';
-import { Editor, NgxEditorModule } from 'ngx-editor';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuestionUpdateRequestModel } from '../../../../core/models/question/questionUpdateRequestModel';
+import { Question } from '../../../../core/models/question/question-response.model';
+import { ApiResponse } from '../../../../core/models/api-response.model';
 
 @Component({
-  selector: 'app-create-question',
+  selector: 'app-update-question',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     NgxEditorModule
   ],
-  templateUrl: './create-question.component.html',
-  styleUrl: './create-question.component.css'
+  templateUrl: './update-question.component.html',
+  styleUrl: './update-question.component.css'
 })
-export class CreateQuestionComponent implements OnInit, OnDestroy {
+export class UpdateQuestionComponent implements OnInit, OnDestroy {
   questionForm: FormGroup;
   isLoading = false;
   errorMessage = '';
-  examIdFromRoute!: number;
+  questionId!: number;
+  examId!: number;
 
   // ngx-editor nesneleri
   questionEditor!: Editor;
@@ -49,10 +52,8 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.examIdFromRoute = Number(this.route.snapshot.paramMap.get('id'));
-    if (isNaN(this.examIdFromRoute)) {
-      this.errorMessage = 'Geçerli sınav ID bulunamadı.';
-    }
+    this.questionId = Number(this.route.snapshot.paramMap.get('id'));
+    this.loadQuestionData();
 
     // ngx-editor instance'ları
     this.questionEditor = new Editor();
@@ -60,6 +61,26 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
     this.optionBEditor = new Editor();
     this.optionCEditor = new Editor();
     this.optionDEditor = new Editor();
+  }
+
+  loadQuestionData() {
+    this.questionService.getQuestion(this.questionId.toString()).subscribe({
+      next: (response: ApiResponse<Question>) => {
+        const question = response.data;
+        this.examId = question?.examId!;
+        this.questionForm.patchValue({
+          questionText: question?.questionText,
+          optionA: question?.optionA,
+          optionB: question?.optionB,
+          optionC: question?.optionC,
+          optionD: question?.optionD,
+          correctAnswer: question?.correctAnswer
+        });
+      },
+      error: () => {
+        this.errorMessage = 'Soru bilgileri yüklenemedi.';
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -70,7 +91,6 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
     this.optionDEditor.destroy();
   }
 
-  get examId() { return this.questionForm.get('examId'); }
   get questionText() { return this.questionForm.get('questionText'); }
   get optionA() { return this.questionForm.get('optionA'); }
   get optionB() { return this.questionForm.get('optionB'); }
@@ -78,14 +98,12 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
   get optionD() { return this.questionForm.get('optionD'); }
   get correctAnswer() { return this.questionForm.get('correctAnswer'); }
 
-
   onSubmit() {
-    if (this.questionForm.valid && this.examIdFromRoute) {
+    if (this.questionForm.valid) {
       this.isLoading = true;
       this.errorMessage = '';
 
-      const questionData: QuestionCreateRequestModel = {
-        examId: this.examIdFromRoute,
+      const questionData: QuestionUpdateRequestModel = {
         questionText: this.questionForm.value.questionText,
         optionA: this.questionForm.value.optionA,
         optionB: this.questionForm.value.optionB,
@@ -94,15 +112,13 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
         correctAnswer: this.questionForm.value.correctAnswer
       };
 
-      this.questionService.createQuestion(questionData).subscribe({
-        next: (response) => {
-          if (response.data) {
-            alert('Soru başarıyla eklendi!');
-            this.router.navigate(['/instructor/exams', this.examIdFromRoute]);
-          }
+      this.questionService.updateQuestion(this.questionId, questionData).subscribe({
+        next: () => {
+          this.router.navigate(['/instructor/exams', this.examId]);
+          alert('Soru başarıyla güncellendi!');
         },
         error: (error) => {
-          this.errorMessage = error.error?.errorMessage || 'Soru eklenirken bir hata oluştu';
+          this.errorMessage = error.error?.errorMessage || 'Soru güncellenirken bir hata oluştu';
           this.isLoading = false;
         }
       });
@@ -114,7 +130,7 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.router.navigate(['/instructor/exams', this.examIdFromRoute]);
+    this.router.navigate(['/instructor/exams', this.examId]);
   }
 
   setCorrectAnswer(optionKey: 'A' | 'B' | 'C' | 'D') {
@@ -122,3 +138,5 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
     this.correctAnswer?.setValue(value);
   }
 }
+
+

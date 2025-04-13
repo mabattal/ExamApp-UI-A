@@ -1,49 +1,55 @@
 <div *ngIf="exam">
-    <div class="exam-actions">
-        <button (click)="goBack()" class="back-button">← Sınavlara Geri Dön</button>
-        <button (click)="goToCreateQuestion()" class="add-question-button">+ Soru Ekle</button>
+
+  <div class="exam-info">
+    <h2>{{ exam.title }}</h2>
+    <p><strong>Açıklama:</strong> {{ exam.description }}</p>
+    <p><strong>Başlangıç:</strong> {{ formatDate(exam.startDate) }}</p>
+    <p><strong>Bitiş:</strong> {{ formatDate(exam.endDate) }}</p>
+    <p><strong>Süre:</strong> {{ exam.duration }} dakika</p>
+    <p><strong>Soru Sayısı:</strong> {{ exam.questions.length || 0 }}</p>
+  </div>
+
+  <div class="exam-actions">
+    <button (click)="goBack()" class="back-button">← Sınavlara Geri Dön</button>
+    <button (click)="goToCreateQuestion()" class="add-question-button">+ Soru Ekle</button>
+  </div>
+
+  <div class="questions" *ngIf="exam.questions.length > 0">
+    <h3>Sorular</h3>
+    <div *ngFor="let question of paginatedQuestions; let i = index" class="question-card">
+      <!-- 🔧 Yeni: Soru aksiyon butonları -->
+      <div class="question-actions">
+        <button class="edit-button" (click)="editQuestion(question.questionId)">Düzenle</button>
+        <button class="delete-button" (click)="deleteQuestion(question)">Sil</button>
+      </div>
+      <h4>Soru {{ (currentPage - 1) * pageSize + i + 1 }}:</h4>
+      <p [innerHTML]="sanitizeHtml(question.questionText)"></p>
+
+      <ul class="options">
+        <li [class.correct]="question.correctAnswer === question.optionA">
+          A) <span [innerHTML]="sanitizeHtml(question.optionA)"></span>
+        </li>
+        <li [class.correct]="question.correctAnswer === question.optionB">
+          B) <span [innerHTML]="sanitizeHtml(question.optionB)"></span>
+        </li>
+        <li [class.correct]="question.correctAnswer === question.optionC">
+          C) <span [innerHTML]="sanitizeHtml(question.optionC)"></span>
+        </li>
+        <li [class.correct]="question.correctAnswer === question.optionD">
+          D) <span [innerHTML]="sanitizeHtml(question.optionD)"></span>
+        </li>
+      </ul>
+
     </div>
 
-    <div class="exam-info">
-        <h2>{{ exam.title }}</h2>
-        <p><strong>Açıklama:</strong> {{ exam.description }}</p>
-        <p><strong>Başlangıç:</strong> {{ formatDate(exam.startDate) }}</p>
-        <p><strong>Bitiş:</strong> {{ formatDate(exam.endDate) }}</p>
-        <p><strong>Süre:</strong> {{ exam.duration }} dakika</p>
-        <p><strong>Soru Sayısı:</strong> {{ exam.questions.length || 0 }}</p>
+    <div class="pagination" *ngIf="exam.questions.length > 0">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Önceki</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Sonraki</button>
     </div>
-
-
-    <div class="questions" *ngIf="exam.questions.length > 0">
-        <h3>Sorular</h3>
-        <div *ngFor="let question of paginatedQuestions; let i = index" class="question-card">
-            <h4>Soru {{ (currentPage - 1) * pageSize + i + 1 }}:</h4>
-            <p [innerHTML]="sanitizeHtml(question.questionText)"></p>
-          
-            <ul class="options">
-              <li [class.correct]="question.correctAnswer === question.optionA">
-                A) <span [innerHTML]="sanitizeHtml(question.optionA)"></span>
-              </li>
-              <li [class.correct]="question.correctAnswer === question.optionB">
-                B) <span [innerHTML]="sanitizeHtml(question.optionB)"></span>
-              </li>
-              <li [class.correct]="question.correctAnswer === question.optionC">
-                C) <span [innerHTML]="sanitizeHtml(question.optionC)"></span>
-              </li>
-              <li [class.correct]="question.correctAnswer === question.optionD">
-                D) <span [innerHTML]="sanitizeHtml(question.optionD)"></span>
-              </li>
-            </ul>
-          </div>          
-
-        <div class="pagination" *ngIf="exam.questions.length > 0">
-            <button (click)="prevPage()" [disabled]="currentPage === 1">Önceki</button>
-            <span>{{ currentPage }} / {{ totalPages }}</span>
-            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Sonraki</button>
-        </div>
-    </div>
+  </div>
 </div>
 
 <div *ngIf="!exam">
-    <p>Sınav detayları yükleniyor...</p>
+  <p>Sınav detayları yükleniyor...</p>
 </div>

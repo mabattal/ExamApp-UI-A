@@ -1,0 +1,140 @@
+.question-form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1f2937;
+  }
+  
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #374151;
+  }
+  
+  ngx-editor {
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    min-height: 50px;
+    background-color: #f9fafb;
+    transition: all 0.2s ease;
+  }
+  
+  ngx-editor:focus-within {
+    border-color: #3b82f6;
+    background-color: #fff;
+  }
+  
+  .form-error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+  }
+  
+  .global-error {
+    color: #b91c1c;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    background-color: #fee2e2;
+    border-radius: 0.5rem;
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .options-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .answer-select-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .answer-option {
+    background-color: #e5e7eb;
+    color: #111827;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .answer-option:hover {
+    background-color: #d1d5db;
+  }
+  
+  .answer-option.active {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #2563eb;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-cancel {
+    background-color: #9ca3af;
+    color: white;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #6b7280;
+  }
+  
+  .btn-submit {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .btn-submit:hover {
+    background-color: #1d4ed8;
+  }
+  
