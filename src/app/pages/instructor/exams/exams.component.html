@@ -37,7 +37,7 @@
                             </button>
                             <button class="btn btn-sm btn-success mx-1" (click)="goToCreateQuestion(exam.examId)">+?</button>
                             <button class="btn btn-sm btn-danger" (click)="deleteExam(exam)">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash" (click)="deleteExam(exam)"></i>
                             </button>
                         </td>
                     </tr>
