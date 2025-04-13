@@ -22,6 +22,13 @@ export const environment = {
         createExamUrl: `${baseApiUrl}/Exams`,
         updateExamUrl: `${baseApiUrl}/Exams/{id}`,
         deleteExamUrl: `${baseApiUrl}/Exams/{id}`
+    },
+    question: {
+        getByExamUrl: `${baseApiUrl}/Questions/examId/{id}`,
+        getQuestionUrl: `${baseApiUrl}/Questions/{id}`,
+        createQuestionUrl: `${baseApiUrl}/Questions`,
+        updateQuestionUrl: `${baseApiUrl}/Questions/{id}`,
+        deleteQuestionUrl: `${baseApiUrl}/Questions/{id}`,
     }
 
 };

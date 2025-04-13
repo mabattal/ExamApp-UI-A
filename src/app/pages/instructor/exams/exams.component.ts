@@ -82,5 +82,13 @@ export class ExamsComponent implements OnInit {
       });
     }
   }
+
+  viewExam(id: number) {
+    this.router.navigate(['/instructor/exams', id.toString()]);
+  }
+
+  goToCreateQuestion(id: number): void {
+      this.router.navigate(['/instructor/exams', id.toString(), 'create-question']);
+  }
   
 }

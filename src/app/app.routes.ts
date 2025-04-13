@@ -122,12 +122,13 @@ export const appRoutes: Routes = [
         canActivate: [InstructorGuard],
         children: [
           {
-            path: 'dashboard',
+            path: 'dashboard',            
             loadComponent: () =>
               import('./pages/instructor/dashboard/dashboard.component').then(m => m.InstructorDashboardComponent),
           },
           {
             path: 'exams',
+            pathMatch: 'full',
             loadComponent: () =>
               import('./pages/instructor/exams/exams.component').then(m => m.ExamsComponent),
           },
@@ -140,6 +141,17 @@ export const appRoutes: Routes = [
             path: 'exams/update/:id',
             loadComponent: () =>
               import('./pages/instructor/exams/update-exam/update-exam.component').then(m => m.UpdateExamComponent),
+          },
+          {
+            path: 'exams/:id',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import('./pages/instructor/exams/exam-detail/exam-detail.component').then(m => m.ExamDetailComponent),
+          },
+          {
+            path: 'exams/:id/create-question',
+            loadComponent: () =>
+              import('./pages/instructor/questions/create-question/create-question.component').then(m => m.CreateQuestionComponent),
           },
         ],
       },

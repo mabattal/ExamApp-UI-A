@@ -1,0 +1,163 @@
+:host {
+  display: block;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.questions {
+  margin-top: 2rem;
+}
+
+.question-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.question-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.question-card p {
+  /* font-weight: bold; */
+  margin-bottom: 0.5rem;
+}
+
+.question-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.question-card li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.exam-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.back-button,
+.add-question-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.add-question-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #ccc;
+}
+
+.add-question-button:hover {
+  background-color: #45a049;
+}
+
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .question-card {
+    padding: 0.8rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.question {
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.question h4 {
+  margin-bottom: 8px;
+}
+
+.options {
+  list-style-type: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.options li {
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+}
+
+.options li.correct {
+  background-color: #d4edda;
+  border-left: 6px solid #28a745;
+  font-weight: bold;
+}

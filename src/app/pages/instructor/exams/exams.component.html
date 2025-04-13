@@ -29,13 +29,13 @@
                         <td>{{ formatDate(exam.endDate) }}</td>
                         <td>{{ exam.duration }} dk</td>
                         <td>
-                            <button class="btn btn-primary btn-sm mx-1">
+                            <button class="btn btn-primary btn-sm mx-1" (click)="viewExam(exam.examId)">
                                 <i class="fas fa-eye"></i>
                             </button>                        
                             <button class="btn btn-sm btn-warning" (click)="editExam(exam.examId)">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-success mx-1">+?</button>
+                            <button class="btn btn-sm btn-success mx-1" (click)="goToCreateQuestion(exam.examId)">+?</button>
                             <button class="btn btn-sm btn-danger" (click)="deleteExam(exam)">
                                 <i class="fas fa-trash"></i>
                             </button>
