@@ -75,6 +75,7 @@ import { AdminGuard } from './core/guards/admin.guard';
 import { InstructorGuard } from './core/guards/instructor.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { StudentGuard } from './core/guards/student.guard';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -164,12 +165,18 @@ export const appRoutes: Routes = [
       // Student alt route'ları
       {
         path: 'student',
-        //canActivate: [StudentGuard],
+        canActivate: [StudentGuard],
         children: [
           {
             path: 'dashboard',
             loadComponent: () =>
               import('./pages/student/dashboard/dashboard.component').then(m => m.StudentDashboardComponent),
+          },
+          {
+            path: 'exams',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import('./pages/student/exams/exams.component').then(m => m.ExamsComponent),
           },
         ],
       },

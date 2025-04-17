@@ -16,9 +16,11 @@ export const environment = {
         deleteUserUrl: `${baseApiUrl}/Users/{id}`
     },
     exam: {
-        getExamsUrl: `${baseApiUrl}/Exams/instructor/{id}`,
-        getExamUrl: `${baseApiUrl}/Exams/{id}`,
+        getExamsByInstructorIdUrl: `${baseApiUrl}/Exams/instructor/{id}`,
+        getByIdUrl: `${baseApiUrl}/Exams/{id}`,
         getActiveExams: `${baseApiUrl}/Exams/active`,
+        getPastExams: `${baseApiUrl}/Exams/past`,
+        getUpcomingExams: `${baseApiUrl}/Exams/upcoming`,
         createExamUrl: `${baseApiUrl}/Exams`,
         updateExamUrl: `${baseApiUrl}/Exams/{id}`,
         deleteExamUrl: `${baseApiUrl}/Exams/{id}`
@@ -29,6 +31,9 @@ export const environment = {
         createQuestionUrl: `${baseApiUrl}/Questions`,
         updateQuestionUrl: `${baseApiUrl}/Questions/{id}`,
         deleteQuestionUrl: `${baseApiUrl}/Questions/{id}`,
+    },
+    examResult: {
+        GetByUserIdAndExamIdUrl: `${baseApiUrl}/ExamResults/{userId}/{examId}`,
     }
 
 };

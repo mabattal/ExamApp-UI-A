@@ -47,7 +47,7 @@ export class UpdateExamComponent implements OnInit {
   get duration() { return this.examForm.get('duration'); }
 
   loadExamData() {
-    this.examService.getExam(this.examId.toString()).subscribe({
+    this.examService.getExamById(this.examId.toString()).subscribe({
       next: (response: ApiResponse<Exam>) => {
         const exam = response.data
         this.examForm.patchValue({

@@ -34,15 +34,10 @@ export class ExamsComponent implements OnInit {
 
   loadExams(): void {
     this.isLoading = true;
-    this.examService.getExams(this.userId).subscribe({
+    this.examService.getExamsByInstructorId(this.userId).subscribe({
       next: (response: ApiResponse<Exam[]>) => {
         if (response.data) {
-          // Sınavlar üzerinde dönüp tarihleri dönüştür
-          this.exams = response.data.map((exam) => ({
-            ...exam,
-            startDate: new Date(exam.startDate),  // startDate'yi Date'e çevir
-            endDate: new Date(exam.endDate)       // endDate'yi Date'e çevir
-          }));
+          this.exams = response.data;
         }
         this.isLoading = false;
       },

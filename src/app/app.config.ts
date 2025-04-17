@@ -1,3 +1,7 @@
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+registerLocaleData(localeTr);
 import { ApplicationConfig } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
@@ -13,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     FormsModule,
     UserService,
-    provideToastr()
+    provideToastr(),
+    { provide: LOCALE_ID, useValue: 'tr' }
   ]
 };

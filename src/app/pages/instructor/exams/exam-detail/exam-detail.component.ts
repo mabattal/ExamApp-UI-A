@@ -32,7 +32,7 @@ export class ExamDetailComponent implements OnInit {
   ngOnInit(): void {
     const examId = Number(this.route.snapshot.paramMap.get('id'));
     if (!isNaN(examId)) {
-      this.examService.getExam(examId.toString()).subscribe({
+      this.examService.getExamById(examId.toString()).subscribe({
         next: (res) => this.exam = res.data,
         error: () => console.error('Sınav verisi alınamadı.')
       });
@@ -85,7 +85,7 @@ export class ExamDetailComponent implements OnInit {
       this.questionService.deleteQuestion(question.questionId).subscribe({
         next: () => {
           alert('Soru başarıyla silindi!');
-          this.router.navigate(['/instructor/exams', question.examId.toString()]);  // Sınav detay sayfasını tekrar yükleyerek güncelleme yapıyoruz
+          this.ngOnInit(); // Sınav detay sayfasını tekrar yükleyerek güncelleme yapıyoruz
         },
         error: (error) => {
           console.error('Hata:', error);

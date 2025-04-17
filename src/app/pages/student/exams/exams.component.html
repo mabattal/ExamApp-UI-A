@@ -1,0 +1,50 @@
+<div class="exams-wrapper">
+  <h2 class="title">📚 Sınavlar</h2>
+
+  <!-- Tabs -->
+  <div class="tab-buttons">
+    <button (click)="activeTab = 'active'" [class.active]="activeTab === 'active'">🟢 Aktif</button>
+    <button (click)="activeTab = 'upcoming'" [class.active]="activeTab === 'upcoming'">🕒 Yaklaşan</button>
+    <button (click)="activeTab = 'past'" [class.active]="activeTab === 'past'">📁 Geçmiş</button>
+  </div>
+
+  <!-- Exam List by Tab -->
+  <div *ngIf="activeTab === 'active'" class="tab-content">
+    <h3>🟢 Aktif Sınavlar</h3>
+    <div *ngIf="errorMessage" class="error-box">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="activeExams.length === 0" class="empty-state">
+      <span>📭 Şu anda aktif sınav bulunmamaktadır.</span>
+    </div>
+    <div class="exam-list">
+      <app-exam-card *ngFor="let exam of activeExams" [exam]="exam" examType="active"></app-exam-card>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'upcoming'" class="tab-content">
+    <h3>🕒 Yaklaşan Sınavlar</h3>
+    <div *ngIf="errorMessage" class="error-box">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="upcomingExams.length === 0" class="empty-state">
+      <span>📭 Yaklaşan sınav bulunmamaktadır.</span>
+    </div>
+    <div class="exam-list">
+      <app-exam-card *ngFor="let exam of upcomingExams" [exam]="exam" examType="upcoming"></app-exam-card>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'past'" class="tab-content">
+    <h3>📁 Geçmiş Sınavlar</h3>
+    <div *ngIf="errorMessage" class="error-box">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="pastExams.length === 0" class="empty-state">
+      <span>📭 Geçmiş sınav bulunmamaktadır.</span>
+    </div>
+    <div class="exam-list">
+      <app-exam-card *ngFor="let exam of pastExams" [exam]="exam" examType="past"></app-exam-card>
+    </div>
+  </div>
+</div>

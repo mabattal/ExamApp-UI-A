@@ -1,0 +1,21 @@
+<div class="exam-card">
+  <h4>{{ exam.title }}</h4>
+  <p><strong>Eğitmen:</strong> {{ exam.instructor.fullName }}</p>
+  <p><strong>Başlangıç:</strong> {{ formatDate(exam.startDate) }}</p>
+  <p><strong>Bitiş:</strong> {{ formatDate(exam.endDate) }}</p>
+  <p><strong>Süre:</strong> {{ exam.duration }} dakika</p>
+  <p><strong>Soru Sayısı:</strong> {{ exam.questionCount ?? 'Yükleniyor...' }}</p>
+
+  <div *ngIf="exam.hasParticipated !== undefined">
+    <p>
+      <strong>Katılım Durumu:</strong>
+      <span [class.participated]="exam.hasParticipated" [class.not-participated]="!exam.hasParticipated">
+        {{ exam.hasParticipated ? 'Katıldı' : 'Katılmadı' }}
+      </span>
+    </p>
+  </div>
+
+  <div *ngIf="examType === 'active' && !exam.hasParticipated" class="button-container">
+    <button (click)="startExam()">🚀 Katıl</button>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
 import { Exam } from '../models/exam/exam-response.model';
 import { ExamCreateRequestModel } from '../models/exam/examCreateRequestModel';
 import { ExamUpdateRequestModel } from '../models/exam/examUpdateRequestModel';
+import { ExamWithInstructorResponseModel } from '../models/exam/examWithInstructorResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,15 @@ import { ExamUpdateRequestModel } from '../models/exam/examUpdateRequestModel';
 export class ExamService {
   constructor(private http: HttpClient) {}
 
-  getExams(id: number): Observable<ApiResponse<Exam[]>> {
-    const url = environment.exam.getExamsUrl
+  getExamsByInstructorId(id: number): Observable<ApiResponse<Exam[]>> {
+    const url = environment.exam.getExamsByInstructorIdUrl
       .replace('{id}', id.toString());
 
     return this.http.get<ApiResponse<Exam[]>>(url);
   }
 
-  getExam(id: string): Observable<ApiResponse<Exam>> {
-    const url = environment.exam.getExamUrl
+  getExamById(id: string): Observable<ApiResponse<Exam>> {
+    const url = environment.exam.getByIdUrl
       .replace('{id}', id);
 
     return this.http.get<ApiResponse<Exam>>(url);
@@ -44,5 +45,20 @@ export class ExamService {
       .replace('{id}', id.toString());
 
     return this.http.delete<ApiEmptyResponse>(url);
+  }
+
+  getActiveExam(): Observable<ApiResponse<ExamWithInstructorResponseModel[]>> {
+    const url = environment.exam.getActiveExams
+    return this.http.get<ApiResponse<ExamWithInstructorResponseModel[]>>(url);
+  }
+
+  getPastExam(): Observable<ApiResponse<ExamWithInstructorResponseModel[]>> {
+    const url = environment.exam.getPastExams
+    return this.http.get<ApiResponse<ExamWithInstructorResponseModel[]>>(url);
+  }
+
+  getUpcomingExam(): Observable<ApiResponse<ExamWithInstructorResponseModel[]>> {
+    const url = environment.exam.getUpcomingExams
+    return this.http.get<ApiResponse<ExamWithInstructorResponseModel[]>>(url);
   }
 }
