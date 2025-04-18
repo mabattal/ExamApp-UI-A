@@ -12,7 +12,7 @@ import { ExamWithInstructorResponseModel } from '../models/exam/examWithInstruct
   providedIn: 'root'
 })
 export class ExamService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getExamsByInstructorId(id: number): Observable<ApiResponse<Exam[]>> {
     const url = environment.exam.getExamsByInstructorIdUrl
@@ -33,7 +33,7 @@ export class ExamService {
     return this.http.post<ApiResponse<{ id: number }>>(url, exam);
   }
 
-   updateExam(id: number, exam:ExamUpdateRequestModel): Observable<ApiEmptyResponse> {
+  updateExam(id: number, exam: ExamUpdateRequestModel): Observable<ApiEmptyResponse> {
     const url = environment.exam.updateExamUrl
       .replace('{id}', id.toString());
 

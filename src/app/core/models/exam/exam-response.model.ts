@@ -1,4 +1,5 @@
-import { Question } from '../question/question-response.model';
+import { QuestionResponseModel } from "../question/questionResponse.model";
+
 
 export interface Exam {
   examId: number;
@@ -7,5 +8,5 @@ export interface Exam {
   startDate: Date;
   endDate: Date;
   duration: number;
-  questions: Question[];
+  questions: QuestionResponseModel[];
 }

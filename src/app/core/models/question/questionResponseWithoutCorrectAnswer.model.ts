@@ -1,4 +1,4 @@
-export interface Question {
+export interface QuestionResponseWithoutCorrectAnswerModel{
     questionId: number;
     examId: number;
     questionText: string;
@@ -6,6 +6,4 @@ export interface Question {
     optionB: string;
     optionC: string;
     optionD: string;
-    correctAnswer: string;
-  }
-  
+}

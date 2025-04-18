@@ -1,0 +1,60 @@
+<div class="exam-wrapper" *ngIf="questions.length > 0">
+    <div class="exam-top">
+
+        <div class="progress-bar-container">
+            <span>Süre: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
+            <div class="progress-bar time-bar">
+                <div class="progress-fill time-fill" [style.width.%]="remainingPercentage">
+                </div>
+            </div>
+            <span>Soru {{ currentQuestionIndex + 1 }} / {{ questions.length }}</span>
+            <div class="progress-bar">
+                <div class="progress-fill"
+                    [style.width.%]="((currentQuestionIndex + 1) / questions.length) * 100"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-card fade-in">
+        <p class="question-text">
+            <strong>Soru {{ currentQuestionIndex + 1 }}:</strong>
+        </p>
+        <p [innerHTML]="sanitizeHtml(currentQuestion.questionText)"></p>
+
+        <div class="options">
+            <button *ngIf="currentQuestion.optionA" [class.selected]="selectedAnswer === currentQuestion.optionA"
+                (click)="selectAnswer(currentQuestion.optionA)">
+                A) <span [innerHTML]="sanitizeHtml(currentQuestion.optionA)"></span>
+            </button>
+
+            <button *ngIf="currentQuestion.optionB" [class.selected]="selectedAnswer === currentQuestion.optionB"
+                (click)="selectAnswer(currentQuestion.optionB)">
+                B) <span [innerHTML]="sanitizeHtml(currentQuestion.optionB)"></span>
+            </button>
+
+            <button *ngIf="currentQuestion.optionC" [class.selected]="selectedAnswer === currentQuestion.optionC"
+                (click)="selectAnswer(currentQuestion.optionC)">
+                C) <span [innerHTML]="sanitizeHtml(currentQuestion.optionC)"></span>
+            </button>
+
+            <button *ngIf="currentQuestion.optionD" [class.selected]="selectedAnswer === currentQuestion.optionD"
+                (click)="selectAnswer(currentQuestion.optionD)">
+                D) <span [innerHTML]="sanitizeHtml(currentQuestion.optionD)"></span>
+            </button>
+        </div>
+
+        <div class="actions">
+            <button class="submit-btn" (click)="submitExam()">
+                Sınavı Bitir
+            </button>
+
+            <button class="skip-btn" *ngIf="currentQuestionIndex !== questions.length - 1" (click)="nextQuestion()">
+                İleri
+            </button>            
+        </div>
+    </div>
+</div>
+
+<div *ngIf="questions.length === 0" class="loading">
+    <p>Yükleniyor...</p>
+</div>

@@ -34,6 +34,12 @@ export const environment = {
     },
     examResult: {
         GetByUserIdAndExamIdUrl: `${baseApiUrl}/ExamResults/{userId}/{examId}`,
+        startExamUrl: `${baseApiUrl}/ExamResults/start/{examId}`,
+        submitExamUrl: `${baseApiUrl}/ExamResults/submit/{examId}`,
+    },
+    answer: {
+        createAnswerUrl: `${baseApiUrl}/Answers`,
+        updateAnswerUrl: `${baseApiUrl}/Answers/{answerId}`,
     }
 
 };

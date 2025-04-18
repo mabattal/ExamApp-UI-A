@@ -5,7 +5,8 @@ import { environment } from '../../../environments/environment';
 import { ApiEmptyResponse, ApiResponse } from '../models/api-response.model';
 import { QuestionCreateRequestModel } from '../models/question/questionCreateRequestModel';
 import { QuestionUpdateRequestModel } from '../models/question/questionUpdateRequestModel';
-import { Question } from '../models/question/question-response.model';
+import { QuestionResponseWithoutCorrectAnswerModel } from '../models/question/questionResponseWithoutCorrectAnswer.model';
+import { QuestionResponseModel } from '../models/question/questionResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,18 @@ import { Question } from '../models/question/question-response.model';
 export class QuestionService {
   constructor(private http: HttpClient) {}
 
-  /* getExams(id: number): Observable<ApiResponse<Exam[]>> {
-    const url = environment.exam.getExamsUrl
-      .replace('{id}', id.toString());
+  getQuestionWithoutCorrectAnswer(examId: string): Observable<ApiResponse<QuestionResponseWithoutCorrectAnswerModel[]>> {
+    const url = environment.question.getByExamUrl
+      .replace('{id}', examId);
 
-    return this.http.get<ApiResponse<Exam[]>>(url);
-  } */
+    return this.http.get<ApiResponse<QuestionResponseWithoutCorrectAnswerModel[]>>(url);
+  }
 
-  getQuestion(id: string): Observable<ApiResponse<Question>> {
+  getQuestion(id: string): Observable<ApiResponse<QuestionResponseModel>> {
     const url = environment.question.getQuestionUrl
       .replace('{id}', id);
 
-    return this.http.get<ApiResponse<Question>>(url);
+    return this.http.get<ApiResponse<QuestionResponseModel>>(url);
   }
 
   createQuestion(question: QuestionCreateRequestModel): Observable<ApiResponse<{ id: number }>> {

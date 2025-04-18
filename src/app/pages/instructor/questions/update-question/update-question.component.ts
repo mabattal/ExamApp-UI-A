@@ -5,8 +5,8 @@ import { Editor, NgxEditorModule, Validators } from 'ngx-editor';
 import { QuestionService } from '../../../../core/services/question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionUpdateRequestModel } from '../../../../core/models/question/questionUpdateRequestModel';
-import { Question } from '../../../../core/models/question/question-response.model';
 import { ApiResponse } from '../../../../core/models/api-response.model';
+import { QuestionResponseModel } from '../../../../core/models/question/questionResponse.model';
 
 @Component({
   selector: 'app-update-question',
@@ -65,7 +65,7 @@ export class UpdateQuestionComponent implements OnInit, OnDestroy {
 
   loadQuestionData() {
     this.questionService.getQuestion(this.questionId.toString()).subscribe({
-      next: (response: ApiResponse<Question>) => {
+      next: (response: ApiResponse<QuestionResponseModel>) => {
         const question = response.data;
         this.examId = question?.examId!;
         this.questionForm.patchValue({

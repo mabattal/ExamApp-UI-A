@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExamService } from '../../../../core/services/exam.service';
 import { Exam } from '../../../../core/models/exam/exam-response.model';
-import { Question } from '../../../../core/models/question/question-response.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { QuestionService } from '../../../../core/services/question.service';
+import { QuestionResponseModel } from '../../../../core/models/question/questionResponse.model';
 
 @Component({
   selector: 'app-exam-detail',
@@ -43,7 +43,7 @@ export class ExamDetailComponent implements OnInit {
     return this.exam?.questions ? Math.ceil(this.exam.questions.length / this.pageSize) : 0;
   }
 
-  get paginatedQuestions(): Question[] {
+  get paginatedQuestions(): QuestionResponseModel[] {
     if (!this.exam?.questions) return [];
     const start = (this.currentPage - 1) * this.pageSize;
     return this.exam.questions.slice(start, start + this.pageSize);
@@ -79,7 +79,7 @@ export class ExamDetailComponent implements OnInit {
     this.router.navigate(['/instructor/update-question', id.toString()]);
   }
 
-  deleteQuestion(question: Question) {
+  deleteQuestion(question: QuestionResponseModel) {
     const confirmation = confirm(`Soruyu silmek istediğinizden emin misiniz?`);
     if (confirmation) {
       this.questionService.deleteQuestion(question.questionId).subscribe({

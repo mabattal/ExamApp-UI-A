@@ -43,8 +43,7 @@ export class ExamsComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.errorMessage = 'Aktif sınavlar alınırken bir hata oluştu';
-        console.error(err);
+        console.error('Aktif sınavlar alınırken bir hata oluştu', err);
       }
     });
 
@@ -56,8 +55,7 @@ export class ExamsComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.errorMessage = 'Geçmiş sınavlar alınırken bir hata oluştu';
-        console.error(err);
+        console.error('Geçmiş sınavlar alınırken bir hata oluştu', err);
       }
     });
 
@@ -69,8 +67,7 @@ export class ExamsComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.errorMessage = 'Gelecek sınavlar alınırken bir hata oluştu';
-        console.error(err);
+        console.error('Gelecek sınavlar alınırken bir hata oluştu' ,err);
       }
     });
   }
@@ -82,7 +79,8 @@ export class ExamsComponent implements OnInit {
           exam.questionCount = res.data?.questions.length;
         },
         error:(err) =>{
-          this.errorMessage = 'Soru sayısı alınırken bir hata oluştu'
+          this.errorMessage = 'Soru sayısı alınırken bir hata oluştu';
+          console.error('Soru sayısı alınırken bir hata oluştu',err);
         }
       });
 

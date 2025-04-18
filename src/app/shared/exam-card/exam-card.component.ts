@@ -22,7 +22,10 @@ export class ExamCardComponent {
   ) { }
 
   startExam(): void {
-    this.router.navigate(['/student/exam/start', this.exam.examId]);
+    const confirmation = confirm(`${this.exam.description}\nSınavı başlatmak istiyor musunuz?`);
+    if(confirmation){
+      this.router.navigate(['/student/exam', this.exam.examId]);
+    }
   }
 
   formatDate(date: Date): string {
