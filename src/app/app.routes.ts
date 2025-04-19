@@ -113,6 +113,11 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/student/start-exam/start-exam.component').then(m => m.StartExamComponent),
           },
+          {
+            path: 'results',
+            loadComponent: () =>
+              import('./pages/student/exam-results/exam-results.component').then(m => m.ExamResultsComponent),
+          },
         ],
       },
     ],

@@ -1,0 +1,120 @@
+.exam-results-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 380px);
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .exam-card {
+    width: 380px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+.exam-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.exam-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exam-card-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.score-badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.score-badge.high {
+    background-color: #4caf50;
+}
+
+.score-badge.medium {
+    background-color: #ff9800;
+}
+
+.score-badge.low {
+    background-color: #f44336;
+}
+
+.instructor {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.exam-info {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.exam-info p {
+    margin: 0.3rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.answer-stats {
+    margin-top: 0.8rem;
+}
+
+.badge {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.correct {
+    background-color: #d4edda;
+    color: #2e7d32;
+}
+
+.incorrect {
+    background-color: #f8d7da;
+    color: #c62828;
+}
+
+.empty {
+    background-color: #fff3cd;
+    color: #8d6e63;
+}
+
+.details-button {
+    margin-top: 1rem;
+    align-self: flex-start;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.details-button:hover {
+    background-color: #1565c0;
+}

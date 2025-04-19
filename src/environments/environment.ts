@@ -33,6 +33,8 @@ export const environment = {
         deleteQuestionUrl: `${baseApiUrl}/Questions/{id}`,
     },
     examResult: {
+        GetByIdUrl: `${baseApiUrl}/ExamResults/{id}`,
+        GetByUserIdUrl: `${baseApiUrl}/ExamResults/user/{userId}`,
         GetByUserIdAndExamIdUrl: `${baseApiUrl}/ExamResults/{userId}/{examId}`,
         startExamUrl: `${baseApiUrl}/ExamResults/start/{examId}`,
         submitExamUrl: `${baseApiUrl}/ExamResults/submit/{examId}`,

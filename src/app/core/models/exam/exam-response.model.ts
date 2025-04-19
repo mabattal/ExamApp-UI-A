@@ -1,4 +1,5 @@
 import { QuestionResponseModel } from "../question/questionResponse.model";
+import { UserResponseModel } from "../user/UserResponseModel";
 
 
 export interface Exam {
@@ -8,5 +9,6 @@ export interface Exam {
   startDate: Date;
   endDate: Date;
   duration: number;
+  instructor: UserResponseModel;
   questions: QuestionResponseModel[];
 }
