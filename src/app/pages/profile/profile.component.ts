@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   showConfirmPassword = false;
 
   userId!: number;
-  UserRole = UserRole;
+  userRole: any;
 
   constructor(
     private fb: FormBuilder,
@@ -117,6 +117,15 @@ export class ProfileComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/dashboard']);
+    if (this.authService.isAdmin()) {
+      this.router.navigate(['/admin/dashboard']);
+    } else if (this.authService.isInstructor()) {
+      this.router.navigate(['/instructor/dashboard']);
+    } else if (this.authService.isStudent()) {
+      this.router.navigate(['/student/dashboard']);
+    } else {
+      this.router.navigate(['']);
+    }
   }
+  
 }
