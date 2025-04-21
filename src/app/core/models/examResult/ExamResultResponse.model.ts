@@ -3,7 +3,7 @@ import { UserResponseModel } from "../user/UserResponseModel";
 export interface ExamResultResponse {
     resultId: number;
     userId: number;
-    student: UserResponseModel;
+    user: UserResponseModel;
     examId: number;
     score: number;
     startDate: Date;

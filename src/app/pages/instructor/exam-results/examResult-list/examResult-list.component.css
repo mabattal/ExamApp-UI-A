@@ -1,0 +1,118 @@
+.results-table-wrapper {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .exam-title {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .search-box {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .results-table th,
+  .results-table td {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .results-table tr {
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+  
+  .results-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .pagination button {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 600px) {
+    .results-table th,
+    .results-table td {
+      padding: 0.4rem;
+      font-size: 0.85rem;
+    }
+  
+    .exam-title {
+      font-size: 1.2rem;
+    }
+  }
+
+  .back-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #bdbdbd;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .empty-state i {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-state p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  
+  

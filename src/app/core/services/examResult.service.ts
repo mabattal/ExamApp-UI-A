@@ -34,7 +34,7 @@ export class ExamResultService {
   }
 
   GetByExamId(examId: number): Observable<ApiResponse<ExamResultResponse[]>> {
-    const url = environment.examResult.GetByUserIdUrl
+    const url = environment.examResult.GetByExamIdUrl
       .replace('{examId}', examId.toString())
 
     return this.http.get<ApiResponse<ExamResultResponse[]>>(url);

@@ -6,6 +6,7 @@ import { ExamResultService } from '../../../../core/services/examResult.service'
 import { AuthService } from '../../../../core/services/auth.service';
 import { catchError, forkJoin, map, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-exam-list',
@@ -22,7 +23,8 @@ export class ExamListComponent implements OnInit {
   constructor(
     private examService: ExamService,
     private examResultService: ExamResultService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +57,9 @@ export class ExamListComponent implements OnInit {
 
   getStats(examId: number): ExamResultStatisticsResponseModel | null {
     return this.statsMap.get(examId) ?? null;
+  }
+
+  viewExamDetail(id: number) {
+    this.router.navigate(['/instructor/exam-results/exams', id.toString()]);
   }
 }
