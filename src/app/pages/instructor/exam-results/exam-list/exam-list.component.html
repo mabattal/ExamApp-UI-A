@@ -1,0 +1,36 @@
+<div class="exam-list-wrapper" *ngIf="!isLoading; else loading">
+    <div *ngFor="let exam of exams" class="exam-card">
+      <div class="card-header">
+        <h2>{{ exam.title }}</h2>
+        <p class="exam-dates">{{ exam.startDate | date: 'short' }} - {{ exam.endDate | date: 'short' }}</p>
+      </div>
+  
+      <p class="description">{{ exam.description }}</p>
+  
+      <div class="card-info">
+        <p><strong>Soru Sayısı:</strong> {{ exam.questions?.length ?? 0 }}</p>
+        <p><strong>Süre:</strong> {{ exam.duration }} dk</p>
+  
+        <ng-container *ngIf="getStats(exam.examId); else noStats">
+          <p><strong>Katılımcı:</strong> {{ getStats(exam.examId)?.studentCount }}</p>
+          <p><strong>Ortalama:</strong> {{ getStats(exam.examId)?.averageScore }}</p>
+          <p><strong>Maksimum:</strong> {{ getStats(exam.examId)?.maxScore }}</p>
+          <p><strong>Minimum:</strong> {{ getStats(exam.examId)?.minScore }}</p>
+        </ng-container>
+  
+        <ng-template #noStats>
+          <p class="no-stats">İstatistik yok</p>
+        </ng-template>
+    </div>
+    
+    <button class="results-button" >
+    <!-- <button class="results-button" [routerLink]="['/instructor/results', exam.examId]"> -->
+        Sonuçları Görüntüle
+      </button>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <p>Sınavlar yükleniyor...</p>
+  </ng-template>
+  

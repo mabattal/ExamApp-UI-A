@@ -1,0 +1,76 @@
+.exam-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    justify-content: center;
+  }
+  
+  .exam-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+  
+    &:hover {
+      transform: translateY(-4px);
+    }
+  
+    .card-header {
+      margin-bottom: 0.8rem;
+  
+      h2 {
+        font-size: 1.3rem;
+        margin: 0;
+        color: #1976d2;
+      }
+  
+      .exam-dates {
+        font-size: 0.9rem;
+        color: #666;
+      }
+    }
+  
+    .description {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: #444;
+    }
+  
+    .card-info {
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.6;
+  
+      p {
+        margin: 0.2rem 0;
+      }
+  
+      .no-stats {
+        font-style: italic;
+        color: #888;
+      }
+    }
+  
+    .results-button {
+      margin-top: 1rem;
+      align-self: flex-start;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+  
+      &:hover {
+        background-color: #1565c0;
+      }
+    }
+  }
+  

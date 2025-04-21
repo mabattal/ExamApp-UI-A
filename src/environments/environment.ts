@@ -35,6 +35,7 @@ export const environment = {
     examResult: {
         GetByIdUrl: `${baseApiUrl}/ExamResults/{id}`,
         GetByUserIdUrl: `${baseApiUrl}/ExamResults/user/{userId}`,
+        GetByExamIdUrl: `${baseApiUrl}/ExamResults/exam/{examId}`,
         GetByUserIdAndExamIdUrl: `${baseApiUrl}/ExamResults/{userId}/{examId}`,
         startExamUrl: `${baseApiUrl}/ExamResults/start/{examId}`,
         submitExamUrl: `${baseApiUrl}/ExamResults/submit/{examId}`,

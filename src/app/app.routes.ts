@@ -89,6 +89,12 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/instructor/questions/update-question/update-question.component').then(m => m.UpdateQuestionComponent),
           },
+          {
+            path: 'exam-results',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import('./pages/instructor/exam-results/exam-list/exam-list.component').then(m => m.ExamListComponent),
+          },
         ],
       },
 

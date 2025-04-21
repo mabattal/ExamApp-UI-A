@@ -4,6 +4,7 @@ import { ExamResultResponse } from "../models/examResult/ExamResultResponse.mode
 import { ApiResponse } from "../models/api-response.model";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
+import { ExamResultStatisticsResponseModel } from "../models/examResult/ExamResultStatisticsResponseModel";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,23 @@ export class ExamResultService {
     return this.http.get<ApiResponse<ExamResultResponse>>(url);
   }
 
+  GetStatisticsById(examId: number): Observable<ApiResponse<ExamResultStatisticsResponseModel>> {
+    const url = environment.examResult.statisticsExamUrl
+      .replace('{examId}', examId.toString())
+
+    return this.http.get<ApiResponse<ExamResultStatisticsResponseModel>>(url);
+  }
+
   GetByUserId(userId: number): Observable<ApiResponse<ExamResultResponse[]>> {
     const url = environment.examResult.GetByUserIdUrl
       .replace('{userId}', userId.toString())
+
+    return this.http.get<ApiResponse<ExamResultResponse[]>>(url);
+  }
+
+  GetByExamId(examId: number): Observable<ApiResponse<ExamResultResponse[]>> {
+    const url = environment.examResult.GetByUserIdUrl
+      .replace('{examId}', examId.toString())
 
     return this.http.get<ApiResponse<ExamResultResponse[]>>(url);
   }
