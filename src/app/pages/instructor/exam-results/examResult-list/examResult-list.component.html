@@ -1,51 +1,51 @@
 <div style="margin-bottom: 1rem;">
-    <button (click)="goBack()" class="back-button">← Sonuçlara Dön</button>
-  </div>
-  
+  <button (click)="goBack()" class="back-button">← Geri</button>
+</div>
+
 <div class="results-table-wrapper" *ngIf="!isLoading; else loading">
-    <h2 class="exam-title">{{ examTitle }}</h2>
-  
-    <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Öğrenci ara..." class="search-box" />
-  
-    <div class="table-wrapper">
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Ad Soyad</th>
-            <th>Email</th>
-            <th>Puan</th>
-            <th>Doğru</th>
-            <th>Yanlış</th>
-            <th>Boş</th>
-            <th>Başlama Zamanı</th>
-            <th>Bitiş Zamanı</th>
-            <th>Süre (dk)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let result of paginatedResults" (click)="onRowClick(result.resultId)">
-            <td>{{ result.user.fullName }}</td>
-            <td>{{ result.user.email }}</td>
-            <td>{{ result.score }}</td>
-            <td>{{ result.correctAnswers }}</td>
-            <td>{{ result.incorrectAnswers }}</td>
-            <td>{{ result.emptyAnswers }}</td>
-            <td>{{ result.startDate | date: 'short'  }}</td>
-            <td>{{ result.completionDate | date: 'short'  }}</td>
-            <td>{{ result.duration }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="pagination">
-      <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Önceki</button>
-      <span>Sayfa {{ currentPage }} / {{ totalPages() }}</span>
-      <button (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages()">Sonraki</button>
-    </div>
+  <h2 class="exam-title">{{ examTitle }}</h2>
+
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Öğrenci ara..."
+    class="search-box" />
+
+  <div class="table-wrapper">
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Ad Soyad</th>
+          <th>Email</th>
+          <th>Puan</th>
+          <th>Doğru</th>
+          <th>Yanlış</th>
+          <th>Boş</th>
+          <th>Başlama Zamanı</th>
+          <th>Bitiş Zamanı</th>
+          <th>Süre (dk)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of paginatedResults" (click)="onRowClick(result.userId, result.examId)">
+          <td>{{ result.user.fullName }}</td>
+          <td>{{ result.user.email }}</td>
+          <td>{{ result.score }}</td>
+          <td>{{ result.correctAnswers }}</td>
+          <td>{{ result.incorrectAnswers }}</td>
+          <td>{{ result.emptyAnswers }}</td>
+          <td>{{ result.startDate | date: 'short' }}</td>
+          <td>{{ result.completionDate | date: 'short' }}</td>
+          <td>{{ result.duration }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
-  <ng-template #loading>
-    <p>Sonuçlar yükleniyor...</p>
-  </ng-template>
-  
+
+  <div class="pagination">
+    <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Önceki</button>
+    <span>Sayfa {{ currentPage }} / {{ totalPages() }}</span>
+    <button (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages()">Sonraki</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Sonuçlar yükleniyor...</p>
+</ng-template>

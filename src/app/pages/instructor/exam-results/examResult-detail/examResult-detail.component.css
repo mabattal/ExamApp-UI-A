@@ -1,0 +1,135 @@
+.question-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  .question-text {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .option {
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    background-color: #f3f3f3;
+    transition: background-color 0.3s ease;
+  }
+
+  .option span {
+    display: inline-block;
+    margin-left: 0.3rem;
+  }
+  
+  
+  /* Cevaplar için renkler */
+  .correct {
+    background-color: #d4edda !important; /* yeşil */
+  }
+  
+  .wrong {
+    background-color: #ffe0b2 !important; /* turuncu */
+  }
+  
+  .highlight-correct {
+    border: 2px solid #4caf50;
+  }
+  
+  .answer-info {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    border-top: 1px solid #eee;
+    padding-top: 0.6rem;
+  }
+  
+  .correct-text {
+    color: green;
+    font-weight: 600;
+  }
+  
+  .wrong-text {
+    color: #ff0000;
+    font-weight: 600;
+  }
+  
+  .unanswered-text {
+    color: #e67e22;
+    font-style: italic;
+  }
+  
+  .correct-answer {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+  
+  .correct-answer strong,
+  .correct-answer span {
+    display: inline;
+  }  
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .pagination button {
+    padding: 0.5rem 1rem;
+    background-color: #1976d2;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  
+  .header-info {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .header-info .card {
+    background: #f0f4f8;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-info h2 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+  
+  .header-info p {
+    margin: 0.3rem 0;
+  }
+  
+  .back-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #bdbdbd;
+  }

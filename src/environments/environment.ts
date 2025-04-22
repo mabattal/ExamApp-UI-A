@@ -28,6 +28,7 @@ export const environment = {
     question: {
         getByExamUrl: `${baseApiUrl}/Questions/examId/{id}`,
         getQuestionUrl: `${baseApiUrl}/Questions/{id}`,
+        getQuestionWithCorrectAnswerUrl: `${baseApiUrl}/Questions/withCorrectAnswer/examId/{examId}`,
         createQuestionUrl: `${baseApiUrl}/Questions`,
         updateQuestionUrl: `${baseApiUrl}/Questions/{id}`,
         deleteQuestionUrl: `${baseApiUrl}/Questions/{id}`,
@@ -44,6 +45,7 @@ export const environment = {
     answer: {
         createAnswerUrl: `${baseApiUrl}/Answers`,
         updateAnswerUrl: `${baseApiUrl}/Answers/{answerId}`,
+        getAnswerByexamIdAndUserIdUrl: `${baseApiUrl}/Answers/exam/{userId}/{examId}`
     }
 
 };

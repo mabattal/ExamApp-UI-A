@@ -76,7 +76,7 @@ export class ExamsComponent implements OnInit {
     exams.forEach(exam => {
       this.examService.getExamById(exam.examId.toString()).subscribe({
         next: res => {
-          exam.questionCount = res.data?.questions.length;
+          exam.questionCount = res.data?.questions?.length ?? 0;
         },
         error:(err) =>{
           this.errorMessage = 'Soru sayısı alınırken bir hata oluştu';

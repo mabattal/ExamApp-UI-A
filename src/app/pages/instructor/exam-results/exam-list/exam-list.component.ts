@@ -60,6 +60,6 @@ export class ExamListComponent implements OnInit {
   }
 
   viewExamDetail(id: number) {
-    this.router.navigate(['/instructor/exam-results/exams', id.toString()]);
+    this.router.navigate(['/instructor/exam-results/exam', id.toString()]);
   }
 }

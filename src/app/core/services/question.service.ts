@@ -28,6 +28,13 @@ export class QuestionService {
     return this.http.get<ApiResponse<QuestionResponseModel>>(url);
   }
 
+  getQuestionWithCorrectAnswer(examId: string): Observable<ApiResponse<QuestionResponseModel[]>> {
+    const url = environment.question.getQuestionWithCorrectAnswerUrl
+      .replace('{examId}', examId);
+
+    return this.http.get<ApiResponse<QuestionResponseModel[]>>(url);
+  }
+
   createQuestion(question: QuestionCreateRequestModel): Observable<ApiResponse<{ id: number }>> {
     const url = environment.question.createQuestionUrl;
     return this.http.post<ApiResponse<{ id: number }>>(url, question);

@@ -1,0 +1,91 @@
+<div style="margin-bottom: 1rem;">
+    <button (click)="goBack()" class="back-button">← Sonuçlara Dön</button>
+  </div>
+<!-- Exam and User Header -->
+<div class="header-info" *ngIf="exam && user && examResult">
+    <div class="card">
+        <h2>{{ exam.title }}</h2>
+        <p><strong>Başlama-Bitiş Tarihi:</strong> {{ examResult.startDate | date:'short' }} - {{ examResult.completionDate | date:'short' }}</p>
+        <p><strong>Soru Sayısı:</strong> {{ examResult.totalQuestions }}</p>
+        <p><strong>Kullanılan Zaman (dk):</strong> {{ examResult.duration }}</p>
+        <p><strong>Puan:</strong> {{ examResult.score }}</p>
+        <hr />
+        <p><strong>Öğrenci:</strong> {{ user.fullName }} ({{ user.email }})</p>
+    </div>
+</div>
+
+<div class="exam-result-wrapper" *ngIf="pagedQuestions.length > 0;">
+    <div *ngFor="let question of pagedQuestions; let i = index" class="question-card">
+        <div class="question-text"><strong>{{ i + 1 }}.</strong> <span [innerHTML]="question.questionText"></span>
+        </div>
+
+        <ng-container *ngIf="getAnswerForQuestion(question.questionId) as answer; else notAnswered">
+
+            <div class="option" [ngClass]="{
+              'correct': question.optionA === question.correctAnswer,
+              'wrong': answer.selectedAnswer === question.optionA && question.optionA !== question.correctAnswer
+            }">
+                A) <span [innerHTML]="question.optionA"></span>
+            </div>
+
+            <div class="option" [ngClass]="{
+              'correct': question.optionB === question.correctAnswer,
+              'wrong': answer.selectedAnswer === question.optionB && question.optionB !== question.correctAnswer
+            }">
+                B) <span [innerHTML]="question.optionB"></span>
+            </div>
+
+            <div class="option" [ngClass]="{
+              'correct': question.optionC === question.correctAnswer,
+              'wrong': answer.selectedAnswer === question.optionC && question.optionC !== question.correctAnswer
+            }">
+                C) <span [innerHTML]="question.optionC"></span>
+            </div>
+
+            <div class="option" [ngClass]="{
+              'correct': question.optionD === question.correctAnswer,
+              'wrong': answer.selectedAnswer === question.optionD && question.optionD !== question.correctAnswer
+            }">
+                D) <span [innerHTML]="question.optionD"></span>
+            </div>
+
+            <div class="answer-info">
+                <p><strong>Cevaplanma Tarihi:</strong> {{ answer.createdDate | date:'medium' }}</p>
+                <p>
+                    <strong>Durum: </strong>
+                    <span [ngClass]="{ 'correct-text': answer.isCorrect, 'wrong-text': !answer.isCorrect }">
+                        {{ answer.isCorrect ? 'Doğru' : 'Yanlış' }}
+                    </span>
+                </p>
+            </div>
+        </ng-container>
+
+        <ng-template #notAnswered>
+            <div class="option">A) <span [innerHTML]="question.optionA"></span></div>
+            <div class="option">B) <span [innerHTML]="question.optionB"></span></div>
+            <div class="option">C) <span [innerHTML]="question.optionC"></span></div>
+            <div class="option">D) <span [innerHTML]="question.optionD"></span></div>
+
+            <div class="answer-info">
+                <p>
+                  <strong>Durum:</strong>
+                  <span class="unanswered-text"> Cevaplanmamış</span>
+                </p>
+                <p class="correct-answer">
+                  <strong>Doğru Cevap: </strong>
+                  <span [innerHTML]="question.correctAnswer"></span>
+                </p>
+              </div>
+              
+        </ng-template>
+    </div>
+
+
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Önceki</button>
+        <span>Sayfa {{ currentPage }} / {{ totalPages }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Sonraki</button>
+    </div>
+</div>

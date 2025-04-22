@@ -14,7 +14,7 @@
     <p class="description">{{ exam.description }}</p>
 
     <div class="card-info">
-      <p><strong>Soru Sayısı:</strong> {{ exam.questions?.length ?? 0 }}</p>
+      <p><strong>Soru Sayısı:</strong> {{ exam.questions.length }}</p>
       <p><strong>Süre:</strong> {{ exam.duration }} dk</p>
 
       <ng-container *ngIf="getStats(exam.examId); else noStats">

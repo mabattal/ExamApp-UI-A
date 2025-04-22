@@ -90,15 +90,20 @@ export const appRoutes: Routes = [
               import('./pages/instructor/questions/update-question/update-question.component').then(m => m.UpdateQuestionComponent),
           },
           {
-            path: 'exam-results/exams',
+            path: 'exam-results',
             pathMatch: 'full',
             loadComponent: () =>
               import('./pages/instructor/exam-results/exam-list/exam-list.component').then(m => m.ExamListComponent),
           },
           {
-            path: 'exam-results/exams/:examId',
+            path: 'exam-results/exam/:examId',
             loadComponent: () =>
               import('./pages/instructor/exam-results/examResult-list/examResult-list.component').then(m => m.ExamResultListComponent),
+          },
+          {
+            path: 'exam-results/exam/:examId/user/:userId',
+            loadComponent: () =>
+              import('./pages/instructor/exam-results/examResult-detail/examResult-detail.component').then(m => m.ExamResultDetailComponent),
           },
         ],
       },

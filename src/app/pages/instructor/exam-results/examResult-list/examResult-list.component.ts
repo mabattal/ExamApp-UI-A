@@ -29,7 +29,7 @@ export class ExamResultListComponent implements OnInit {
     private resultService: ExamResultService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.examId = +this.route.snapshot.paramMap.get('examId')!;
@@ -65,8 +65,8 @@ export class ExamResultListComponent implements OnInit {
     return this.filteredResults.slice(startIndex, startIndex + this.pageSize);
   }
 
-  onRowClick(resultId: number) {
-    this.router.navigate(['/instructor/exam-result-detail', resultId]);
+  onRowClick(userId: number, examId: number) {
+    this.router.navigate(['/instructor/exam-results/exam', examId, 'user', userId]);
   }
 
   totalPages(): number {
@@ -74,6 +74,6 @@ export class ExamResultListComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/instructor/exam-results/exams']);
+    this.router.navigate(['/instructor/exam-results']);
   }
 }

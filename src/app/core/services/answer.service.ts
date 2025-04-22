@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { ApiEmptyResponse, ApiResponse } from "../models/api-response.model";
 import { environment } from "../../../environments/environment";
 import { AnswerUpdateRequestModel } from "../models/answer/answerUpdateRequestModel";
+import { AnswerResponseModel } from "../models/answer/AnswerResponseModel";
 
 
 @Injectable({
@@ -23,6 +24,14 @@ export class AnswerService {
       .replace('{answerId}', id.toString());
 
     return this.http.put<ApiEmptyResponse>(url, answer);
+  }
+
+  GetAnswersByExamIdAndUserId(examId: number, userId: number): Observable<ApiResponse<AnswerResponseModel[]>>{
+    const url = environment.answer.getAnswerByexamIdAndUserIdUrl
+    .replace('{examId}', examId.toString())
+    .replace('{userId}', userId.toString());
+
+    return this.http.get<ApiResponse<AnswerResponseModel[]>>(url);
   }
 
 }
