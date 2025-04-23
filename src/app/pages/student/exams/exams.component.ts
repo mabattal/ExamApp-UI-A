@@ -67,7 +67,7 @@ export class ExamsComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.error('Gelecek sınavlar alınırken bir hata oluştu' ,err);
+        console.error('Gelecek sınavlar alınırken bir hata oluştu', err);
       }
     });
   }
@@ -78,9 +78,9 @@ export class ExamsComponent implements OnInit {
         next: res => {
           exam.questionCount = res.data?.questions?.length ?? 0;
         },
-        error:(err) =>{
+        error: (err) => {
           this.errorMessage = 'Soru sayısı alınırken bir hata oluştu';
-          console.error('Soru sayısı alınırken bir hata oluştu',err);
+          console.error('Soru sayısı alınırken bir hata oluştu', err);
         }
       });
 

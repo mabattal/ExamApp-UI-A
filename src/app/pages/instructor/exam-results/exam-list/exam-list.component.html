@@ -1,36 +1,57 @@
-<!-- Hiç sınav yoksa uyarı kartı -->
-<div *ngIf="exams.length === 0 && isLoading" class="empty-state">
-  <i class="fas fa-clipboard-list"></i>
-  <p>Henüz sınav sonucu bulunmuyor</p>
-</div>
+<div class="exam-page-container">
 
-<div class="exam-list-wrapper" *ngIf="!isLoading;">
-  <div *ngFor="let exam of exams" class="exam-card">
-    <div class="card-header">
-      <h2>{{ exam.title }}</h2>
-      <p class="exam-dates">{{ exam.startDate | date: 'short' }} - {{ exam.endDate | date: 'short' }}</p>
-    </div>
+  <!-- Boş Durum -->
+  <div *ngIf="filteredExams.length === 0 && !isLoading" class="empty-state">
+    <i class="fas fa-clipboard-list"></i>
+    <p>Henüz sınav sonucu bulunmuyor</p>
+  </div>
 
-    <p class="description">{{ exam.description }}</p>
+  <!-- Sınav Kartları -->
+  <div *ngIf="!isLoading" class="exam-grid">
+    <ng-container *ngFor="let exam of filteredExams">
+      <div class="exam-card">
 
-    <div class="card-info">
-      <p><strong>Soru Sayısı:</strong> {{ exam.questions.length }}</p>
-      <p><strong>Süre:</strong> {{ exam.duration }} dk</p>
+        <div class="exam-card-header">
+          <h3 class="exam-title">{{ exam.title }}</h3>
+          <span class="exam-duration">{{ exam.duration }} dk</span>
+        </div>
 
-      <ng-container *ngIf="getStats(exam.examId); else noStats">
-        <p><strong>Katılımcı:</strong> {{ getStats(exam.examId)?.studentCount }}</p>
-        <p><strong>Ortalama:</strong> {{ getStats(exam.examId)?.averageScore }}</p>
-        <p><strong>Maksimum:</strong> {{ getStats(exam.examId)?.maxScore }}</p>
-        <p><strong>Minimum:</strong> {{ getStats(exam.examId)?.minScore }}</p>
-      </ng-container>
+        <div class="exam-meta">
+          <span>{{ exam.startDate | date: 'short' }} - {{ exam.endDate | date: 'short' }}</span>
+        </div>
 
-      <ng-template #noStats>
-        <p class="no-stats">İstatistik yok</p>
-      </ng-template>
-    </div>
+        <div class="exam-description">
+          {{ exam.description }}
+        </div>
 
-    <button class="results-button" [disabled]="!getStats(exam.examId)" (click)="viewExamDetail(exam.examId)">
-      Sonuçları Görüntüle
-    </button>
+        <div class="exam-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>{{ exam.questions.length }} Soru</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-user-graduate"></i>
+            <span>{{ getStats(exam.examId)?.studentCount }} Katılımcı</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Ort: {{ getStats(exam.examId)?.averageScore }}</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-star"></i>
+            <span>Maks: {{ getStats(exam.examId)?.maxScore }}</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-arrow-down"></i>
+            <span>Min: {{ getStats(exam.examId)?.minScore }}</span>
+          </div>
+        </div>
+
+        <button class="btn-view" (click)="viewExamDetail(exam.examId)">
+          Sonuçları Görüntüle
+        </button>
+
+      </div>
+    </ng-container>
   </div>
 </div>

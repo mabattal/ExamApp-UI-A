@@ -9,6 +9,7 @@ import { ExamResultService } from '../../../core/services/examResult.service';
 import { Exam } from '../../../core/models/exam/exam-response.model';
 import { AnswerCreateRequestModel } from '../../../core/models/answer/answerCreateRequestModel';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-start-exam',
@@ -27,6 +28,7 @@ export class StartExamComponent implements OnInit {
   intervalId: any;
   errorMessage: string = '';
   totalExamSeconds!: number; // toplam süre
+  isSubmitting = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -115,8 +117,9 @@ export class StartExamComponent implements OnInit {
     this.selectedAnswer = answer;
   }
 
-  nextQuestion(): void {
+  async nextQuestion(): Promise<void> {
     if (this.selectedAnswer) {
+      this.isSubmitting = true;
       const currentQuestion = this.questions[this.currentQuestionIndex];
       const answerRequest: AnswerCreateRequestModel = {
         examId: this.examId,
@@ -124,28 +127,54 @@ export class StartExamComponent implements OnInit {
         selectedAnswer: this.selectedAnswer
       };
 
-      this.answerService.CreateAnswer(answerRequest).subscribe();
+      try {
+        await firstValueFrom(this.answerService.CreateAnswer(answerRequest));
+      } catch (error) {
+        console.error('Cevap kaydedilirken hata oluştu:', error);
+        alert('Cevap kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.');
+        this.isSubmitting = false;
+        return;
+      }
     }
 
     this.selectedAnswer = null;
     this.currentQuestionIndex++;
 
     if (this.currentQuestionIndex >= this.questions.length) {
-      this.submitExam();
+      await this.submitExam();
     }
+
+    this.isSubmitting = false;
   }
 
-  submitExam(): void {
-    clearInterval(this.intervalId);
-    this.examResultService.SubmitExam(this.examId).subscribe({
-      next: () => {
-        document.exitFullscreen();
-        this.router.navigate(['/student/exams']);
+  async submitExam(): Promise<void> {
+    if (this.isSubmitting) return; // birden fazla submit engelle
+    this.isSubmitting = true;
+
+    try {
+      if (this.selectedAnswer) {
+        const currentQuestion = this.questions[this.currentQuestionIndex];
+        const answerRequest: AnswerCreateRequestModel = {
+          examId: this.examId,
+          questionId: currentQuestion.questionId,
+          selectedAnswer: this.selectedAnswer
+        };
+        await firstValueFrom(this.answerService.CreateAnswer(answerRequest));
       }
-    });
-    alert('Sınavınız tamamlandı!');
 
-  }
+      await firstValueFrom(this.examResultService.SubmitExam(this.examId));
+
+      alert('Sınavınız tamamlandı!');
+      document.exitFullscreen();
+      this.router.navigate(['/student/exams']);
+    } catch (error) {
+      console.error('Sınav bitirilirken hata oluştu:', error);
+      alert('Sınav bitirilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      clearInterval(this.intervalId);
+      this.isSubmitting = false;
+    }
+  }  
 
   get currentQuestion(): QuestionResponseWithoutCorrectAnswerModel {
     return this.questions[this.currentQuestionIndex];

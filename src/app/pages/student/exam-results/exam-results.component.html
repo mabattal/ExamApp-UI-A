@@ -1,35 +1,32 @@
 <div class="exam-results-wrapper" *ngIf="!isLoading; else loading">
-    <div *ngFor="let result of examResults" class="exam-card">
-      <div class="exam-card-header">
-        <h3>{{ getExamTitle(result.examId) }}</h3>
-        <span class="score-badge" [ngClass]="{
+  <div *ngFor="let result of examResults" class="exam-card">
+    <div class="exam-card-header">
+      <h3>{{ getExamTitle(result.examId) }}</h3>
+      <span class="score-badge" [ngClass]="{
           'high': result.score >= 80,
           'medium': result.score >= 50 && result.score < 80,
           'low': result.score < 50
         }">{{ result.score }} / 100</span>
-      </div>
-  
-      <p class="instructor"><i class="fa fa-chalkboard-teacher"></i> {{ getExamInstructor(result.examId) }}</p>
-  
-      <div class="exam-info">
-        <p><i class="fa fa-question-circle"></i> {{ result.totalQuestions }} Soru</p>
-        <p><i class="fa fa-clock"></i> {{ result.duration }} dk</p>
-        <p><i class="fa fa-calendar-alt"></i> {{ result.startDate | date:'short' }} - {{ result.completionDate | date:'short' }}</p>
-      </div>
-  
-      <div class="answer-stats">
-        <span class="badge correct">✔️ Doğru: {{ result.correctAnswers }}</span>
-        <span class="badge incorrect">❌ Yanlış: {{ result.incorrectAnswers }}</span>
-        <span class="badge empty">⬜ Boş: {{ result.emptyAnswers }}</span>
-      </div>
-  
-      <button class="details-button" [routerLink]="['/student/results', result.resultId]">
-        📄 Detaylar
-      </button>
     </div>
+
+    <p class="instructor"><i class="fa fa-chalkboard-teacher"></i> {{ getExamInstructor(result.examId) }}</p>
+
+    <div class="exam-info">
+      <p><i class="fa fa-question-circle"></i> {{ result.totalQuestions }} Soru</p>
+      <p><i class="fa fa-clock"></i> {{ result.duration }} dk</p>
+      <p><i class="fa fa-calendar-alt"></i> {{ result.startDate | date:'short' }} - {{ result.completionDate |
+        date:'short' }}</p>
+    </div>
+
+    <div class="answer-stats">
+      <span class="badge correct">✔️ Doğru: {{ result.correctAnswers }}</span>
+      <span class="badge incorrect">❌ Yanlış: {{ result.incorrectAnswers }}</span>
+      <span class="badge empty">⬜ Boş: {{ result.emptyAnswers }}</span>
+    </div>
+
   </div>
-  
-  <ng-template #loading>
-    <p>Sonuçlar yükleniyor...</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #loading>
+  <p>Sonuçlar yükleniyor...</p>
+</ng-template>

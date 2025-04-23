@@ -59,6 +59,11 @@ export class ExamListComponent implements OnInit {
     return this.statsMap.get(examId) ?? null;
   }
 
+  get filteredExams(): Exam[] {
+    return this.exams.filter((exam) => this.statsMap.get(exam.examId) !== null);
+  }
+  
+
   viewExamDetail(id: number) {
     this.router.navigate(['/instructor/exam-results/exam', id.toString()]);
   }

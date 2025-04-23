@@ -1,21 +1,21 @@
-<div class="exam-card">
-  <h4>{{ exam.title }}</h4>
-  <p><strong>Eğitmen:</strong> {{ exam.instructor.fullName }}</p>
-  <p><strong>Başlangıç:</strong> {{ formatDate(exam.startDate) }}</p>
-  <p><strong>Bitiş:</strong> {{ formatDate(exam.endDate) }}</p>
-  <p><strong>Süre:</strong> {{ exam.duration }} dakika</p>
-  <p><strong>Soru Sayısı:</strong> {{ exam.questionCount ?? 'Yükleniyor...' }}</p>
-
-  <div *ngIf="exam.hasParticipated !== undefined">
-    <p>
-      <strong>Katılım Durumu:</strong>
-      <span [class.participated]="exam.hasParticipated" [class.not-participated]="!exam.hasParticipated">
-        {{ exam.hasParticipated ? 'Katıldı' : 'Katılmadı' }}
-      </span>
-    </p>
+<div class="exam-card" [class.clickable]="examType === 'active' && !hasTakenExam"
+  [class.disabled]="!(examType === 'active' && !hasTakenExam)"
+  (click)="examType === 'active' && !hasTakenExam && startExam()">
+  <div class="card-header">
+    <h3 class="title">{{ exam.title }}</h3>
+    <span class="duration">{{ exam.duration }} dk</span>
   </div>
 
-  <div *ngIf="examType === 'active' && !exam.hasParticipated" class="button-container">
-    <button (click)="startExam()">🚀 Katıl</button>
+  <span class="instructor">{{ exam.instructor.fullName }}</span>
+
+  <div class="meta">
+    <span class="date">{{ formatDate(exam.startDate) }} → {{ formatDate(exam.endDate) }}</span>
+    <span class="questions">{{ exam.questionCount ?? 0 }} soru</span>
+  </div>
+
+  <div class="participation">
+    <span class="badge" [class.taken]="hasTakenExam" [class.not-taken]="!hasTakenExam">
+      {{ hasTakenExam ? 'Katıldı' : 'Katılmadı' }}
+    </span>
   </div>
 </div>

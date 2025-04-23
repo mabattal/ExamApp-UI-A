@@ -18,7 +18,7 @@
       <span>📭 Şu anda aktif sınav bulunmamaktadır.</span>
     </div>
     <div class="exam-list">
-      <app-exam-card *ngFor="let exam of activeExams" [exam]="exam" examType="active"></app-exam-card>
+      <app-exam-card *ngFor="let exam of activeExams" [exam]="exam" examType="active" [hasTakenExam]="!!exam.hasParticipated"></app-exam-card>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
       <span>📭 Yaklaşan sınav bulunmamaktadır.</span>
     </div>
     <div class="exam-list">
-      <app-exam-card *ngFor="let exam of upcomingExams" [exam]="exam" examType="upcoming"></app-exam-card>
+      <app-exam-card *ngFor="let exam of upcomingExams" [exam]="exam" examType="upcoming" [hasTakenExam]="!!exam.hasParticipated"></app-exam-card>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
       <span>📭 Geçmiş sınav bulunmamaktadır.</span>
     </div>
     <div class="exam-list">
-      <app-exam-card *ngFor="let exam of pastExams" [exam]="exam" examType="past"></app-exam-card>
+      <app-exam-card *ngFor="let exam of pastExams" [exam]="exam" examType="past" [hasTakenExam]="!!exam.hasParticipated"></app-exam-card>
     </div>
   </div>
 </div>
