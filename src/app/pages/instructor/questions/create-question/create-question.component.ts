@@ -104,6 +104,7 @@ export class CreateQuestionComponent implements OnInit, OnDestroy {
         error: (error) => {
           this.errorMessage = error.error?.errorMessage || 'Soru eklenirken bir hata oluştu';
           this.isLoading = false;
+          console.error(error);
         }
       });
     } else {

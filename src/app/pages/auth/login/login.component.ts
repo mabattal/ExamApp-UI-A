@@ -46,7 +46,8 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Giriş hatası:', error);
-        this.errorMessage = error instanceof Error ? error.message : 'E-posta veya şifre hatalı.';
+        this.errorMessage = 'E-posta veya şifre hatalı.';
+        this.loading = false;
       },
       complete: () => {
         this.loading = false;

@@ -1,20 +1,19 @@
 import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
 import { EMPTY, throwError } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-  //const toastr = inject(ToastrService);
+  const authService = inject(AuthService);
 
   if (req.url.includes('/Auth/Login')) {
     return next(req);
   }
 
-  const token = localStorage.getItem('token');
-
+  const token = authService.getToken();
   if (token) {
     req = req.clone({
       setHeaders: {
@@ -26,12 +25,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error) => {
       const status = error?.status;
-      if (status === 401 || status === 0) {
-        console.warn('Oturum süresi doldu veya yetkisiz erişim. Login sayfasına yönlendiriliyor.');
 
-        // Token'ı temizle
-        localStorage.removeItem('token');
-        //toastr.warning('Oturumunuz sona erdi, lütfen tekrar giriş yapın.', 'Oturum Süresi Doldu');
+      if (status === 401 || status === 403) {
+        console.warn('Oturum süresi doldu veya yetkisiz erişim. Login sayfasına yönlendiriliyor.');
+        authService.logout();
 
         // Mevcut sayfa login değilse yönlendir
         if (router.url !== '/login') {

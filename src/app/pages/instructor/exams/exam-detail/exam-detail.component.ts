@@ -34,7 +34,7 @@ export class ExamDetailComponent implements OnInit {
     if (!isNaN(examId)) {
       this.examService.getExamById(examId.toString()).subscribe({
         next: (res) => this.exam = res.data,
-        error: () => console.error('Sınav verisi alınamadı.')
+        error: (error) => console.error(error)
       });
     }
   }

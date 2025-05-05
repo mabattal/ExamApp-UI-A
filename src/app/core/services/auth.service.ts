@@ -26,12 +26,16 @@ export class AuthService {
           this.currentUserSubject.next(response.data);
         }
       }),
-      catchError((error: HttpErrorResponse | Error) => {
-        const errMsg = error instanceof HttpErrorResponse
-          ? `Sunucu hatası: ${error.status} ${error.message}`
-          : `Uygulama hatası: ${error.message}`;
-        console.error(errMsg);
-        return throwError(() => new Error(errMsg));
+      catchError((error: HttpErrorResponse) => {
+        let customErrorMessage = 'Giriş işlemi sırasında bir hata oluştu.';
+  
+        if (error.error?.errorMessage) {
+          customErrorMessage = Array.isArray(error.error.errorMessage)
+            ? error.error.errorMessage.join(', ')
+            : error.error.errorMessage;
+        }
+  
+        return throwError(() => new Error(customErrorMessage));
       })
     );
   }
@@ -56,6 +60,10 @@ export class AuthService {
         this.currentUserSubject.next(null);
       })
     );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   isAuthenticated(): boolean {

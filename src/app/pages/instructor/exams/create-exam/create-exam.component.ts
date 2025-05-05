@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ExamService } from '../../../../core/services/exam.service';
 import { ExamCreateRequestModel } from '../../../../core/models/exam/examCreateRequestModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-exam',
@@ -68,14 +69,11 @@ export class CreateExamComponent implements OnInit {
             alert('Sınav başarıyla oluşturuldu!');
           }
         },
-        error: (error) => {
-          if (error.error?.errorMessage) {
-            this.errorMessage = Array.isArray(error.error.errorMessage)
-              ? error.error.errorMessage.join(', ')
-              : String(error.error.errorMessage);
-          } else {
-            this.errorMessage = 'Sınav oluşturulurken bir hata oluştu';
-          }
+        error: (error: HttpErrorResponse) => {
+          console.error('Hata yanıtı:', error);
+        
+          this.errorMessage = 'Sunucudan bilinmeyen bir hata döndü.';
+        
           this.isLoading = false;
         }
       });
