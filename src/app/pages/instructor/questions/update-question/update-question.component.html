@@ -1,88 +1,95 @@
 <div class="question-form-container">
-    <h2 class="form-title">Soru Güncelle</h2>
+  <h2 class="form-title">Soru Güncelle</h2>
 
-    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-wrapper">
 
-        <!-- Soru Metni -->
-        <div class="form-group">
-            <label class="form-label">Soru Metni</label>
-            <ngx-editor-menu [editor]="questionEditor"></ngx-editor-menu>
-            <ngx-editor [editor]="questionEditor" formControlName="questionText"></ngx-editor>
-            <div *ngIf="questionText?.touched && questionText?.invalid" class="form-error">
-                Bu alan zorunludur.
-            </div>
+    <!-- Soru Metni -->
+    <div class="form-group">
+      <label class="form-label">Soru Metni</label>
+      <ngx-editor-menu [editor]="questionEditor"></ngx-editor-menu>
+      <ngx-editor [editor]="questionEditor" formControlName="questionText"></ngx-editor>
+      <div *ngIf="questionText?.touched && questionText?.invalid" class="form-error">
+        Bu alan zorunludur.
+      </div>
+    </div>
+
+    <!-- Seçenekler -->
+    <div class="options-grid">
+
+      <div class="form-group">
+        <label class="form-label">Seçenek A</label>
+        <ngx-editor-menu [editor]="optionAEditor"></ngx-editor-menu>
+        <ngx-editor [editor]="optionAEditor" formControlName="optionA"></ngx-editor>
+        <div *ngIf="optionA?.touched && optionA?.invalid && optionA?.hasError('emptyHtml')" class="form-error">
+          Bu alan zorunludur.
         </div>
-
-        <!-- Seçenekler -->
-        <div class="options-grid">
-
-            <div class="form-group">
-                <label class="form-label">Seçenek A</label>
-                <ngx-editor-menu [editor]="optionAEditor"></ngx-editor-menu>
-                <ngx-editor [editor]="optionAEditor" formControlName="optionA"></ngx-editor>
-                <div *ngIf="optionA?.touched && optionA?.invalid" class="form-error">
-                    Bu alan zorunludur.
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Seçenek B</label>
-                <ngx-editor-menu [editor]="optionBEditor"></ngx-editor-menu>
-                <ngx-editor [editor]="optionBEditor" formControlName="optionB"></ngx-editor>
-                <div *ngIf="optionB?.touched && optionB?.invalid" class="form-error">
-                    Bu alan zorunludur.
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Seçenek C</label>
-                <ngx-editor-menu [editor]="optionCEditor"></ngx-editor-menu>
-                <ngx-editor [editor]="optionCEditor" formControlName="optionC"></ngx-editor>
-                <div *ngIf="optionC?.touched && optionC?.invalid" class="form-error">
-                    Bu alan zorunludur.
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Seçenek D</label>
-                <ngx-editor-menu [editor]="optionDEditor"></ngx-editor-menu>
-                <ngx-editor [editor]="optionDEditor" formControlName="optionD"></ngx-editor>
-                <div *ngIf="optionD?.touched && optionD?.invalid" class="form-error">
-                    Bu alan zorunludur.
-                </div>
-            </div>
-
+        <div *ngIf="optionA?.touched && optionA?.errors?.['duplicate']" class="text-danger">
+          Bu içerik başka bir şıkla aynı olamaz
         </div>
-
-        <!-- Doğru Cevap -->
-        <div class="form-group">
-            <label class="form-label">Doğru Cevap</label>
-            <div class="answer-select-group">
-
-                <button type="button" class="answer-option" [class.active]="correctAnswer?.value === optionA?.value"
-                    (click)="setCorrectAnswer('A')">A
-                </button>
-                <button type="button" class="answer-option" [class.active]="correctAnswer?.value === optionB?.value"
-                    (click)="setCorrectAnswer('B')">B
-                </button>
-                <button type="button" class="answer-option" [class.active]="correctAnswer?.value === optionC?.value"
-                    (click)="setCorrectAnswer('C')">C
-                </button>
-                <button type="button" class="answer-option" [class.active]="correctAnswer?.value === optionD?.value"
-                    (click)="setCorrectAnswer('D')">D
-                </button>
-            </div>
-            <div *ngIf="correctAnswer?.touched && correctAnswer?.invalid" class="form-error">
-                Lütfen doğru cevabı seçiniz.
-            </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Seçenek B</label>
+        <ngx-editor-menu [editor]="optionBEditor"></ngx-editor-menu>
+        <ngx-editor [editor]="optionBEditor" formControlName="optionB"></ngx-editor>
+        <div *ngIf="optionB?.touched && optionB?.invalid && optionB?.hasError('emptyHtml')" class="form-error">
+          Bu alan zorunludur.
         </div>
-
-        <!-- Hata Mesajı -->
-        <div *ngIf="errorMessage" class="global-error">
-            {{ errorMessage }}
+        <div *ngIf="optionB?.touched && optionB?.errors?.['duplicate']" class="text-danger">
+          Bu içerik başka bir şıkla aynı olamaz
         </div>
-
-        <!-- Butonlar -->
-        <div class="form-buttons">
-            <button type="button" (click)="onCancel()" class="btn btn-cancel">Vazgeç</button>
-            <button type="submit" class="btn btn-submit">Güncelle</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Seçenek C</label>
+        <ngx-editor-menu [editor]="optionCEditor"></ngx-editor-menu>
+        <ngx-editor [editor]="optionCEditor" formControlName="optionC"></ngx-editor>
+        <div *ngIf="optionC?.touched && optionC?.invalid && optionC?.hasError('emptyHtml')" class="form-error">
+          Bu alan zorunludur.
         </div>
-    </form>
+        <div *ngIf="optionC?.touched && optionC?.errors?.['duplicate']" class="text-danger">
+          Bu içerik başka bir şıkla aynı olamaz
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Seçenek D</label>
+        <ngx-editor-menu [editor]="optionDEditor"></ngx-editor-menu>
+        <ngx-editor [editor]="optionDEditor" formControlName="optionD"></ngx-editor>
+        <div *ngIf="optionD?.touched && optionD?.invalid && optionD?.hasError('emptyHtml')" class="form-error">
+          Bu alan zorunludur.
+        </div>
+        <div *ngIf="optionD?.touched && optionD?.errors?.['duplicate']" class="text-danger">
+          Bu içerik başka bir şıkla aynı olamaz
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Doğru Cevap -->
+    <div class="form-group">
+      <label class="form-label">Doğru Cevap</label>
+      <div class="answer-select-group">
+        <button type="button" class="answer-option" [class.active]="isCorrectAnswerSelected('A')"
+          (click)="setCorrectAnswer('A')">A</button>
+        <button type="button" class="answer-option" [class.active]="isCorrectAnswerSelected('B')"
+          (click)="setCorrectAnswer('B')">B</button>
+        <button type="button" class="answer-option" [class.active]="isCorrectAnswerSelected('C')"
+          (click)="setCorrectAnswer('C')">C</button>
+        <button type="button" class="answer-option" [class.active]="isCorrectAnswerSelected('D')"
+          (click)="setCorrectAnswer('D')">D</button>
+      </div>
+      <div *ngIf="correctAnswer?.touched && correctAnswer?.invalid" class="form-error">
+        Lütfen doğru cevabı seçiniz.
+      </div>
+    </div>
+
+    <!-- Hata Mesajı -->
+    <div *ngIf="errorMessage" class="global-error">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Butonlar -->
+    <div class="form-buttons">
+      <button type="button" (click)="onCancel()" class="btn btn-cancel">Vazgeç</button>
+      <button type="submit" class="btn btn-submit">Güncelle</button>
+    </div>
+  </form>
 </div>
