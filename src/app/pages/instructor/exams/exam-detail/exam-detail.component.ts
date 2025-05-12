@@ -18,7 +18,7 @@ import { QuestionResponseModel } from '../../../../core/models/question/question
 export class ExamDetailComponent implements OnInit {
   exam: Exam | null = null;
   currentPage = 1;
-  pageSize = 3;
+  pageSize = 1;
 
   constructor(
     private route: ActivatedRoute,
