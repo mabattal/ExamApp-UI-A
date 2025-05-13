@@ -1,4 +1,4 @@
-# 🎓 ExamApp - Online Sınav Uygulaması (Frontend - Angular)
+# 🎓 ExamApp - Online Sınav Sistemi (Angular)
 
 **ExamApp**, modern yazılım mimarileri ve güvenlik standartları kullanılarak geliştirilmiş, çok rollü (Admin, Instructor, Student) bir çevrim içi sınav uygulamasıdır. Kullanıcılar sınav oluşturabilir, katılabilir ve sonuçlarını görüntüleyebilir. Bu proje Angular ile geliştirilmiş frontend kısmını içerir ve .NET 8 Web API ile haberleşir.
 
