@@ -1,59 +1,94 @@
-# ExamApp
+# 🎓 ExamApp - Online Sınav Uygulaması (Frontend - Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+**ExamApp**, modern yazılım mimarileri ve güvenlik standartları kullanılarak geliştirilmiş, çok rollü (Admin, Instructor, Student) bir çevrim içi sınav uygulamasıdır. Kullanıcılar sınav oluşturabilir, katılabilir ve sonuçlarını görüntüleyebilir. Bu proje Angular ile geliştirilmiş frontend kısmını içerir ve .NET 8 Web API ile haberleşir.
 
-## Development server
+## 🚀 Backend Projesi
+.NET 8 Web API ile oluşturulan beckend projesine [buradan](https://github.com/mabattal/ExamApp-Clean) ulaşabilirsiniz.
 
-To start a local development server, run:
+---
 
+## 🖥️ Proje Görselleri
+
+| Admin - Kullanıcılar | Öğrenci - Sınavlar | Öğrenci - Sınav Ekranı |
+|-------|--------------------|------------------------|
+| ![Kullanıcilar](./screenshots/kullanici-listesi.png) | ![Ogrenci-sinavlar](./screenshots/ogrenci-sinavlar.png) | ![Sinav](./screenshots/sinav.png) |
+
+| Eğitmen - Sınav Detay | Eğitmen - Soru Ekle | Eğitmen - Sınav Ekle |
+|-------|--------------------|------------------------|
+| ![Kullanıcilar](./screenshots/sinav-detay.png) | ![Ogrenci-sinavlar](./screenshots/soru-ekle.png) | ![Sinav](./screenshots/yeni-sinav.png) |
+
+| Eğitmen - Sonuç İstatikleri | Eğitmen - Sınav Sonuç Listesi | Eğitmen - Sınav Sonuç Detay |
+|-------|--------------------|------------------------|
+| ![Kullanıcilar](./screenshots/egitmen-sonuclar.png) | ![Ogrenci-sinavlar](./screenshots/egitmen-sinav-sonuc-listesi.png) | ![Sinav](./screenshots/egitmen-sinav-sonuc-detay.png) |
+
+
+---
+
+## 🧩 Kullanılan Teknolojiler
+
+- **Angular 17+** (standalone components ile)
+- **TypeScript**
+- **RxJS**
+- **SCSS / CSS**
+- **JWT Authentication**
+- **Lazy Loading**
+- **Role-based Routing (Admin / Instructor / Student)**
+- **Reactive & Template Driven Forms**
+- **Custom Pipes & Guards**
+- **Responsive Tasarım (Mobil Uyumlu)**
+
+---
+
+## 📦 Kurulum ve Çalıştırma
+
+### 1. Repo'yu Klonla
+```bash
+git clone https://github.com/mabattal/ExamApp-UI-A
+cd ExamApp-UI-A
+```
+
+### 2. Bağımlılıkları Kur
+```bash
+npm install
+```
+
+### 3. Ortam Ayarlarını Yap
+
+src/environments/environment.ts dosyasına git ve API adresini ekle:
+```bash
+const baseApiUrl = 'https://localhost:7203';
+```
+
+### 4. Uygulamayı Başlat
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔐 Giriş Bilgileri (Demo için)
+| Rol     | Email                     | Şifre          |
+| ------- | ------------------------- | -------------- |
+| Admin   | admin@admin.com           | Admin123       |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 🧭 Routing Yapısı
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Angular routing modülünde kullanıcı rolleri için farklı modüller tanımlandı:
 
-```bash
-ng generate --help
-```
+- /admin/** → Admin paneli
 
-## Building
+- /instructor/** → Eğitmen paneli
 
-To build the project run:
+- /student/** → Öğrenci paneli
 
-```bash
-ng build
-```
+- /login → Giriş ekranı
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- /not-found → 404 sayfası
 
-## Running unit tests
+🛡️ AuthGuard ile JWT token kontrolü ve role bazlı erişim kısıtlamaları uygulanmaktadır.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+💡 Proje herkese açıktır. Pull request'ler ve issue bildirimleri memnuniyetle karşılanır.
