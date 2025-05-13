@@ -1,51 +1,51 @@
 // src/environments/environment.ts
-const baseApiUrl = 'https://localhost:7203/api';
+const baseApiUrl = 'https://localhost:7203';
 
 export const environment = {
     production: false,
     baseApiUrl,
     auth: {
-        loginUrl: `${baseApiUrl}/Auth/Login`,
-        logoutUrl: `${baseApiUrl}/Auth/Logout`
+        loginUrl: `${baseApiUrl}/api/Auth/Login`,
+        logoutUrl: `${baseApiUrl}/api/Auth/Logout`
     },
     user: {
-        getUsersUrl: `${baseApiUrl}/Users/{pageNumber}/{pageSize}`,
-        getUserUrl: `${baseApiUrl}/Users/{value}`,
-        createUserUrl: `${baseApiUrl}/Users`,
-        updateUserUrl: `${baseApiUrl}/Users/{id}`,
-        deleteUserUrl: `${baseApiUrl}/Users/{id}`
+        getUsersUrl: `${baseApiUrl}/api/Users/{pageNumber}/{pageSize}`,
+        getUserUrl: `${baseApiUrl}/api/Users/{value}`,
+        createUserUrl: `${baseApiUrl}/api/Users`,
+        updateUserUrl: `${baseApiUrl}/api/Users/{id}`,
+        deleteUserUrl: `${baseApiUrl}/api/Users/{id}`
     },
     exam: {
-        getExamsByInstructorIdUrl: `${baseApiUrl}/Exams/instructor/{id}`,
-        getByIdUrl: `${baseApiUrl}/Exams/{id}`,
-        getActiveExams: `${baseApiUrl}/Exams/active`,
-        getPastExams: `${baseApiUrl}/Exams/past`,
-        getUpcomingExams: `${baseApiUrl}/Exams/upcoming`,
-        createExamUrl: `${baseApiUrl}/Exams`,
-        updateExamUrl: `${baseApiUrl}/Exams/{id}`,
-        deleteExamUrl: `${baseApiUrl}/Exams/{id}`
+        getExamsByInstructorIdUrl: `${baseApiUrl}/api/Exams/instructor/{id}`,
+        getByIdUrl: `${baseApiUrl}/api/Exams/{id}`,
+        getActiveExams: `${baseApiUrl}/api/Exams/active`,
+        getPastExams: `${baseApiUrl}/api/Exams/past`,
+        getUpcomingExams: `${baseApiUrl}/api/Exams/upcoming`,
+        createExamUrl: `${baseApiUrl}/api/Exams`,
+        updateExamUrl: `${baseApiUrl}/api/Exams/{id}`,
+        deleteExamUrl: `${baseApiUrl}/api/Exams/{id}`
     },
     question: {
-        getByExamUrl: `${baseApiUrl}/Questions/examId/{id}`,
-        getQuestionUrl: `${baseApiUrl}/Questions/{id}`,
-        getQuestionWithCorrectAnswerUrl: `${baseApiUrl}/Questions/withCorrectAnswer/examId/{examId}`,
-        createQuestionUrl: `${baseApiUrl}/Questions`,
-        updateQuestionUrl: `${baseApiUrl}/Questions/{id}`,
-        deleteQuestionUrl: `${baseApiUrl}/Questions/{id}`,
+        getByExamUrl: `${baseApiUrl}/api/Questions/examId/{id}`,
+        getQuestionUrl: `${baseApiUrl}/api/Questions/{id}`,
+        getQuestionWithCorrectAnswerUrl: `${baseApiUrl}/api/Questions/withCorrectAnswer/examId/{examId}`,
+        createQuestionUrl: `${baseApiUrl}/api/Questions`,
+        updateQuestionUrl: `${baseApiUrl}/api/Questions/{id}`,
+        deleteQuestionUrl: `${baseApiUrl}/api/Questions/{id}`,
     },
     examResult: {
-        GetByIdUrl: `${baseApiUrl}/ExamResults/{id}`,
-        GetByUserIdUrl: `${baseApiUrl}/ExamResults/user/{userId}`,
-        GetByExamIdUrl: `${baseApiUrl}/ExamResults/exam/{examId}`,
-        GetByUserIdAndExamIdUrl: `${baseApiUrl}/ExamResults/{userId}/{examId}`,
-        startExamUrl: `${baseApiUrl}/ExamResults/start/{examId}`,
-        submitExamUrl: `${baseApiUrl}/ExamResults/submit/{examId}`,
-        statisticsExamUrl: `${baseApiUrl}/ExamResults/statistics/{examId}`,
+        GetByIdUrl: `${baseApiUrl}/api/ExamResults/{id}`,
+        GetByUserIdUrl: `${baseApiUrl}/api/ExamResults/user/{userId}`,
+        GetByExamIdUrl: `${baseApiUrl}/api/ExamResults/exam/{examId}`,
+        GetByUserIdAndExamIdUrl: `${baseApiUrl}/api/ExamResults/{userId}/{examId}`,
+        startExamUrl: `${baseApiUrl}/api/ExamResults/start/{examId}`,
+        submitExamUrl: `${baseApiUrl}/api/ExamResults/submit/{examId}`,
+        statisticsExamUrl: `${baseApiUrl}/api/ExamResults/statistics/{examId}`,
     },
     answer: {
-        createAnswerUrl: `${baseApiUrl}/Answers`,
-        updateAnswerUrl: `${baseApiUrl}/Answers/{answerId}`,
-        getAnswerByexamIdAndUserIdUrl: `${baseApiUrl}/Answers/exam/{userId}/{examId}`
+        createAnswerUrl: `${baseApiUrl}/api/Answers`,
+        updateAnswerUrl: `${baseApiUrl}/api/Answers/{answerId}`,
+        getAnswerByexamIdAndUserIdUrl: `${baseApiUrl}/api/Answers/exam/{userId}/{examId}`
     }
 
 };
