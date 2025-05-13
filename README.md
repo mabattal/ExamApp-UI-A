@@ -26,7 +26,7 @@
 
 ## 🧩 Kullanılan Teknolojiler
 
-- **Angular 17+** (standalone components ile)
+- **Angular 19+** (standalone components ile)
 - **TypeScript**
 - **RxJS**
 - **SCSS / CSS**
